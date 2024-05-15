@@ -9,8 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>yudao-module-infra-api</artifactId>
-    <packaging>jar</packaging>
-
+    
     <name>${project.artifactId}</name>
     <description>
         infra 模块 API，暴露给其它模块调用

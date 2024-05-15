@@ -11,8 +11,7 @@
     </parent>
 
     <artifactId>quickstart-application</artifactId>
-    <packaging>jar</packaging>
-
+    
     <name>${project.artifactId}</name>
     <description>
         system 模块下，我们放通用业务，支撑上层的核心业务。
@@ -41,19 +40,6 @@
         <dependency>
             <groupId>org.ximinghui</groupId>
             <artifactId>yudao-spring-boot-starter-protection</artifactId>
-        </dependency>
-
-
-        <!-- ###################################### -->
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-module-system-api</artifactId>
-            <version>${revision}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-module-infra-api</artifactId>
-            <version>${revision}</version>
         </dependency>
 
         <!-- 业务组件 -->

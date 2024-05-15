@@ -11,8 +11,7 @@
     </parent>
 
     <artifactId>quickstart-infrastructure</artifactId>
-    <packaging>jar</packaging>
-
+    
     <name>${project.artifactId}</name>
     <description>
         infra 模块，主要提供两块能力：
@@ -21,17 +20,6 @@
     </description>
 
     <dependencies>
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-module-system-api</artifactId>
-            <version>${revision}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-module-infra-api</artifactId>
-            <version>${revision}</version>
-        </dependency>
-
         <!-- 业务组件 -->
         <dependency>
             <groupId>org.ximinghui</groupId>

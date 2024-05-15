@@ -9,8 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>yudao-spring-boot-starter-mq</artifactId>
-    <packaging>jar</packaging>
-
+    
     <name>${project.artifactId}</name>
     <description>消息队列，支持 Redis、RocketMQ、RabbitMQ、Kafka 四种</description>
     <url>https://github.com/YunaiV/ruoyi-vue-pro</url>

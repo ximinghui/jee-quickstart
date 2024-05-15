@@ -4,11 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- 项目信息 -->
     <groupId>org.ximinghui</groupId>
     <artifactId>jee-quickstart</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
+    <name>JEE Quick Start</name>
+    <description>JEE Quick Start是一个用于快速开发Java企业应用的模板项目</description>
 
+    <!-- 项目结构 -->
     <modules>
         <module>quickstart-common</module>
         <module>quickstart-infrastructure</module>
@@ -16,16 +20,23 @@
         <module>refactoring-required</module>
     </modules>
 
-    <name>${project.artifactId}</name>
-    <description>芋道项目基础脚手架</description>
-    <url>https://github.com/YunaiV/ruoyi-vue-pro</url>
-
+    <!-- 属性定义 -->
     <properties>
+        <!-- 项目版本 -->
         <revision>2.1.0-snapshot</revision>
-        <!-- Maven 相关 -->
-        <java.version>17</java.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <!-- Java源代码版本 -->
+        <maven.compiler.source>17</maven.compiler.source>
+        <!-- Java字节码版本 -->
+        <maven.compiler.target>17</maven.compiler.target>
+        <!-- Java发行版本 -->
+        <maven.compiler.release>17</maven.compiler.release>
+        <!-- Java源码和资源文件编码 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Java字节码保留方法参数元数据 -->
+        <maven.compiler.parameters>true</maven.compiler.parameters>
+        <!-- Java编译时显示警告信息 -->
+        <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+
         <maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
@@ -33,7 +44,6 @@
         <lombok.version>1.18.30</lombok.version>
         <spring.boot.version>3.2.2</spring.boot.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- 统一依赖管理 -->
         <!-- Web 相关 -->
@@ -93,9 +103,10 @@
         <weixin-java.version>4.6.0</weixin-java.version>
     </properties>
 
+    <!-- 依赖管理 -->
     <dependencyManagement>
         <dependencies>
-            <!-- 统一依赖管理 -->
+            <!-- Spring Boot依赖管理：提供统一的依赖项版本管理 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>

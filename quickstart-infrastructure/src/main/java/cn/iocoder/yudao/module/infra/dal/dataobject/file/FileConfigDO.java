@@ -75,20 +75,14 @@ public class FileConfigDO extends BaseDO {
             // 兼容老版本的包路径
             String className = JsonUtils.parseObject(json, "@class", String.class);
             className = StrUtil.subAfter(className, ".", true);
-            switch (className) {
-                case "DBFileClientConfig":
-                    return JsonUtils.parseObject2(json, DBFileClientConfig.class);
-                case "FtpFileClientConfig":
-                    return JsonUtils.parseObject2(json, FtpFileClientConfig.class);
-                case "LocalFileClientConfig":
-                    return JsonUtils.parseObject2(json, LocalFileClientConfig.class);
-                case "SftpFileClientConfig":
-                    return JsonUtils.parseObject2(json, SftpFileClientConfig.class);
-                case "S3FileClientConfig":
-                    return JsonUtils.parseObject2(json, S3FileClientConfig.class);
-                default:
-                    throw new IllegalArgumentException("未知的 FileClientConfig 类型：" + json);
-            }
+            return switch (className) {
+                case "DBFileClientConfig" -> JsonUtils.parseObject2(json, DBFileClientConfig.class);
+                case "FtpFileClientConfig" -> JsonUtils.parseObject2(json, FtpFileClientConfig.class);
+                case "LocalFileClientConfig" -> JsonUtils.parseObject2(json, LocalFileClientConfig.class);
+                case "SftpFileClientConfig" -> JsonUtils.parseObject2(json, SftpFileClientConfig.class);
+                case "S3FileClientConfig" -> JsonUtils.parseObject2(json, S3FileClientConfig.class);
+                default -> throw new IllegalArgumentException("未知的 FileClientConfig 类型：" + json);
+            };
         }
 
         @Override

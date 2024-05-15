@@ -4,23 +4,26 @@ server:
 --- #################### 数据库相关配置 ####################
 
 spring:
-  # 数据源配置项
+  # 数据源相关配置
   datasource:
-    druid: # Druid 【监控】相关的全局配置
-      web-stat-filter:
-        enabled: true
+    # Druid相关配置
+    druid:
+      # 参考：https://github.com/alibaba/druid/wiki/配置_StatViewServlet配置
       stat-view-servlet:
-        enabled: true
-        allow: # 设置白名单，不填则允许所有访问
-        url-pattern: /druid/*
-        login-username: # 控制台管理用户名和密码
-        login-password:
+        enabled: true # 启用stat-view-servlet（即“内置监控页面”）
+        url-pattern: /druid/* # 内置监控页面的访问路径
+      # 参考：https://github.com/alibaba/druid/wiki/配置_配置WebStatFilter
+      web-stat-filter:
+        enabled: true # 启用web-stat-filter（即对“WEB URL”进行监控）
+      # 过滤器
       filter:
+        # 参考：https://github.com/alibaba/druid/wiki/配置_StatFilter
         stat:
           enabled: true
-          log-slow-sql: true # 慢 SQL 记录
-          slow-sql-millis: 100
           merge-sql: true
+          log-slow-sql: true
+          slow-sql-millis: 100
+        # 参考：https://github.com/alibaba/druid/wiki/配置-wallfilter
         wall:
           config:
             multi-statement-allow: true

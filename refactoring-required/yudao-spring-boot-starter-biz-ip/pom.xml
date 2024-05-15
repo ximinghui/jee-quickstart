@@ -9,8 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>yudao-spring-boot-starter-biz-ip</artifactId>
-    <packaging>jar</packaging>
-
+    
     <name>${project.artifactId}</name>
     <description>IP 拓展，支持如下功能：
         1. IP 功能：查询 IP 对应的城市信息

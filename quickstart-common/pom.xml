@@ -2,19 +2,33 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 父项目 -->
     <parent>
         <groupId>org.ximinghui</groupId>
         <artifactId>jee-quickstart</artifactId>
         <version>${revision}</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 项目信息 -->
     <artifactId>quickstart-common</artifactId>
-    <packaging>jar</packaging>
+    <name>JEE Quick Start Common</name>
+    <description>JEE Quick Start Common是一个实用工具类库 | TODO: 定义基础 pojo 类、枚举、工具类等等</description>
 
-    <name>${project.artifactId}</name>
-    <description>定义基础 pojo 类、枚举、工具类等等</description>
-    <url>https://github.com/YunaiV/ruoyi-vue-pro</url>
+    <!-- 属性定义 -->
+    <properties>
+        <!-- Java源代码版本 -->
+        <maven.compiler.source>21</maven.compiler.source>
+        <!-- Java字节码版本 -->
+        <maven.compiler.target>21</maven.compiler.target>
+        <!-- Java发行版本 -->
+        <maven.compiler.release>21</maven.compiler.release>
+        <!-- Java源码和资源文件编码 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
+    <!-- 依赖项 -->
     <dependencies>
         <!-- Spring 核心 -->
         <dependency>
