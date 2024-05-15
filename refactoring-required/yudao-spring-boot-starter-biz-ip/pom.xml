@@ -3,16 +3,21 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>yudao-framework</artifactId>
+        <artifactId>refactoring-required</artifactId>
         <groupId>cn.iocoder.boot</groupId>
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>yudao-spring-boot-starter-biz-data-permission</artifactId>
+    <artifactId>yudao-spring-boot-starter-biz-ip</artifactId>
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
-    <description>数据权限</description>
+    <description>IP 拓展，支持如下功能：
+        1. IP 功能：查询 IP 对应的城市信息
+            基于 https://gitee.com/lionsoul/ip2region 实现
+        2. 城市功能：查询城市编码对应的城市信息
+            基于 https://github.com/modood/Administrative-divisions-of-China 实现
+    </description>
     <url>https://github.com/YunaiV/ruoyi-vue-pro</url>
 
     <dependencies>
@@ -21,24 +26,21 @@
             <artifactId>quickstart-common</artifactId>
         </dependency>
 
-        <!-- Web 相关 -->
+        <!-- IP地址检索 -->
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
-            <artifactId>yudao-spring-boot-starter-security</artifactId>
-            <optional>true</optional> <!-- 可选，如果使用 DeptDataPermissionRule 必须提供 -->
+            <groupId>org.lionsoul</groupId>
+            <artifactId>ip2region</artifactId>
         </dependency>
 
-        <!-- DB 相关 -->
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
-            <artifactId>yudao-spring-boot-starter-mybatis</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
 
-        <!-- 业务组件 -->
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
-            <artifactId>yudao-module-system-api</artifactId> <!-- 需要使用它，进行数据权限的获取 -->
-            <version>${revision}</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>provided</scope> <!-- 设置为 provided，只有工具类需要使用到 -->
         </dependency>
 
         <!-- Test 测试相关 -->

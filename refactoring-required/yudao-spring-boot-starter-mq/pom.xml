@@ -4,35 +4,38 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>cn.iocoder.boot</groupId>
-        <artifactId>yudao-framework</artifactId>
+        <artifactId>refactoring-required</artifactId>
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>yudao-spring-boot-starter-protection</artifactId>
+    <artifactId>yudao-spring-boot-starter-mq</artifactId>
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
-    <description>服务保证，提供分布式锁、幂等、限流、熔断等等功能</description>
+    <description>消息队列，支持 Redis、RocketMQ、RabbitMQ、Kafka 四种</description>
     <url>https://github.com/YunaiV/ruoyi-vue-pro</url>
 
     <dependencies>
-        <!-- Web 相关 -->
-        <dependency>
-            <groupId>cn.iocoder.boot</groupId>
-            <artifactId>yudao-spring-boot-starter-web</artifactId>
-            <scope>provided</scope> <!-- 设置为 provided，只有限流、幂等使用到 -->
-        </dependency>
-
         <!-- DB 相关 -->
         <dependency>
             <groupId>cn.iocoder.boot</groupId>
             <artifactId>yudao-spring-boot-starter-redis</artifactId>
         </dependency>
 
-        <!-- 服务保障相关 -->
+        <!-- 消息队列相关 -->
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>lock4j-redisson-spring-boot-starter</artifactId>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
             <optional>true</optional>
         </dependency>
     </dependencies>
