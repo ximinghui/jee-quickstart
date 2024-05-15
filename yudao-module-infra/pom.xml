@@ -9,7 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <modules>
-        <module>yudao-module-infra-api</module>
         <module>yudao-module-infra-biz</module>
     </modules>
     <artifactId>yudao-module-infra</artifactId>
