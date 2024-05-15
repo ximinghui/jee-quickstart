@@ -1,5 +1,6 @@
 package cn.iocoder.yudao.framework.web.config;
 
+import cn.iocoder.yudao.framework.config.YudaoWebAutoConfiguration;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

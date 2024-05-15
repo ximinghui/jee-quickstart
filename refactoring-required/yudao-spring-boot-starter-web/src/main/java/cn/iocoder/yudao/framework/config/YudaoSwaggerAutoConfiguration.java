@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.swagger.config;
+package cn.iocoder.yudao.framework.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

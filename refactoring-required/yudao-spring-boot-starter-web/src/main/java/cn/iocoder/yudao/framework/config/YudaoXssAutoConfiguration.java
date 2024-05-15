@@ -1,6 +1,7 @@
-package cn.iocoder.yudao.framework.xss.config;
+package cn.iocoder.yudao.framework.config;
 
 import cn.iocoder.yudao.framework.common.enums.WebFilterOrderEnum;
+import cn.iocoder.yudao.framework.xss.config.XssProperties;
 import cn.iocoder.yudao.framework.xss.core.clean.JsoupXssCleaner;
 import cn.iocoder.yudao.framework.xss.core.clean.XssCleaner;
 import cn.iocoder.yudao.framework.xss.core.filter.XssFilter;
@@ -17,7 +18,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.util.PathMatcher;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import static cn.iocoder.yudao.framework.web.config.YudaoWebAutoConfiguration.createFilterBean;
+import static cn.iocoder.yudao.framework.config.YudaoWebAutoConfiguration.createFilterBean;
 
 @AutoConfiguration
 @EnableConfigurationProperties(XssProperties.class)

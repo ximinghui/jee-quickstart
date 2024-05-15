@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.jackson.config;
+package cn.iocoder.yudao.framework.config;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.iocoder.yudao.framework.common.util.json.JsonUtils;

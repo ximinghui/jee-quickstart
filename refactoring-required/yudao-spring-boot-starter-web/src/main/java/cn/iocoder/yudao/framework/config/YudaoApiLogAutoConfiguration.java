@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.framework.apilog.config;
+package cn.iocoder.yudao.framework.config;
 
 import cn.iocoder.yudao.framework.apilog.core.filter.ApiAccessLogFilter;
 import cn.iocoder.yudao.framework.apilog.core.interceptor.ApiAccessLogInterceptor;
@@ -8,7 +8,6 @@ import cn.iocoder.yudao.framework.apilog.core.service.ApiErrorLogFrameworkServic
 import cn.iocoder.yudao.framework.apilog.core.service.ApiErrorLogFrameworkServiceImpl;
 import cn.iocoder.yudao.framework.common.enums.WebFilterOrderEnum;
 import cn.iocoder.yudao.framework.web.config.WebProperties;
-import cn.iocoder.yudao.framework.web.config.YudaoWebAutoConfiguration;
 import cn.iocoder.yudao.module.infra.api.logger.ApiAccessLogApi;
 import cn.iocoder.yudao.module.infra.api.logger.ApiErrorLogApi;
 import jakarta.servlet.Filter;
