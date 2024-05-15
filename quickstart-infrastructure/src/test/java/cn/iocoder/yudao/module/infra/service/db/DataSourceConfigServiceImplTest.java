@@ -19,6 +19,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.util.List;
 
 import static cn.iocoder.yudao.framework.test.core.util.AssertUtils.assertPojoEquals;
@@ -72,8 +73,8 @@ public class DataSourceConfigServiceImplTest extends BaseDbUnitTest {
     public void testCreateDataSourceConfig_success() {
         try (MockedStatic<JdbcUtils> databaseUtilsMock = mockStatic(JdbcUtils.class)) {
             // 准备参数
-            DataSourceConfigSaveReqVO reqVO = randomPojo(DataSourceConfigSaveReqVO.class)
-                    .setId(null); // 避免 id 被设置
+            DataSourceConfigSaveReqVO reqVO = randomPojo(DataSourceConfigSaveReqVO.class);
+            reqVO.setId(null); // 避免 id 被设置
             // mock 方法
             databaseUtilsMock.when(() -> JdbcUtils.isConnectionOK(eq(reqVO.getUrl()),
                     eq(reqVO.getUsername()), eq(reqVO.getPassword()))).thenReturn(true);

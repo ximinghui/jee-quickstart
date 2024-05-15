@@ -2,11 +2,13 @@ package cn.iocoder.yudao.framework.websocket.core.sender.redis;
 
 import cn.iocoder.yudao.framework.mq.redis.core.pubsub.AbstractRedisChannelMessage;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Redis 广播 WebSocket 的消息
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class RedisWebSocketMessage extends AbstractRedisChannelMessage {
 
     /**

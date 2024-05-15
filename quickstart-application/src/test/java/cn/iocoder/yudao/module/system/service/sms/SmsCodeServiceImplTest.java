@@ -17,6 +17,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -81,7 +82,10 @@ public class SmsCodeServiceImplTest extends BaseDbUnitTest {
     public void sendSmsCode_tooFast() {
         // mock 数据
         SmsCodeDO smsCodeDO = randomPojo(SmsCodeDO.class,
-                o -> o.setMobile("15601691300").setTodayIndex(1));
+                o -> {
+                    o.setMobile("15601691300");
+                    o.setTodayIndex(1);
+                });
         smsCodeMapper.insert(smsCodeDO);
         // 准备参数
         SmsCodeSendReqDTO reqDTO = randomPojo(SmsCodeSendReqDTO.class, o -> {
@@ -100,7 +104,11 @@ public class SmsCodeServiceImplTest extends BaseDbUnitTest {
     public void sendSmsCode_exceedDay() {
         // mock 数据
         SmsCodeDO smsCodeDO = randomPojo(SmsCodeDO.class,
-                o -> o.setMobile("15601691300").setTodayIndex(10).setCreateTime(LocalDateTime.now()));
+                o -> {
+                    o.setMobile("15601691300");
+                    o.setTodayIndex(10);
+                    o.setCreateTime(LocalDateTime.now());
+                });
         smsCodeMapper.insert(smsCodeDO);
         // 准备参数
         SmsCodeSendReqDTO reqDTO = randomPojo(SmsCodeSendReqDTO.class, o -> {
@@ -126,8 +134,10 @@ public class SmsCodeServiceImplTest extends BaseDbUnitTest {
         // mock 数据
         SqlConstants.init(DbType.MYSQL);
         smsCodeMapper.insert(randomPojo(SmsCodeDO.class, o -> {
-            o.setMobile(reqDTO.getMobile()).setScene(reqDTO.getScene())
-                    .setCode(reqDTO.getCode()).setUsed(false);
+            o.setMobile(reqDTO.getMobile());
+            o.setScene(reqDTO.getScene());
+            o.setCode(reqDTO.getCode());
+            o.setUsed(false);
         }));
 
         // 调用
@@ -148,8 +158,12 @@ public class SmsCodeServiceImplTest extends BaseDbUnitTest {
         });
         // mock 数据
         SqlConstants.init(DbType.MYSQL);
-        smsCodeMapper.insert(randomPojo(SmsCodeDO.class, o -> o.setMobile(reqDTO.getMobile())
-                .setScene(reqDTO.getScene()).setCode(reqDTO.getCode()).setUsed(false)));
+        smsCodeMapper.insert(randomPojo(SmsCodeDO.class, o -> {
+            o.setMobile(reqDTO.getMobile());
+            o.setScene(reqDTO.getScene());
+            o.setCode(reqDTO.getCode());
+            o.setUsed(false);
+        }));
 
         // 调用
         smsCodeService.validateSmsCode(reqDTO);
@@ -179,9 +193,13 @@ public class SmsCodeServiceImplTest extends BaseDbUnitTest {
         });
         // mock 数据
         SqlConstants.init(DbType.MYSQL);
-        smsCodeMapper.insert(randomPojo(SmsCodeDO.class, o -> o.setMobile(reqDTO.getMobile())
-                .setScene(reqDTO.getScene()).setCode(reqDTO.getCode()).setUsed(false)
-                .setCreateTime(LocalDateTime.now().minusMinutes(6))));
+        smsCodeMapper.insert(randomPojo(SmsCodeDO.class, o -> {
+            o.setMobile(reqDTO.getMobile());
+            o.setScene(reqDTO.getScene());
+            o.setCode(reqDTO.getCode());
+            o.setUsed(false);
+            o.setCreateTime(LocalDateTime.now().minusMinutes(6));
+        }));
 
         // 调用，并断言异常
         assertServiceException(() -> smsCodeService.validateSmsCode(reqDTO),
@@ -197,9 +215,13 @@ public class SmsCodeServiceImplTest extends BaseDbUnitTest {
         });
         // mock 数据
         SqlConstants.init(DbType.MYSQL);
-        smsCodeMapper.insert(randomPojo(SmsCodeDO.class, o -> o.setMobile(reqDTO.getMobile())
-                .setScene(reqDTO.getScene()).setCode(reqDTO.getCode()).setUsed(true)
-                .setCreateTime(LocalDateTime.now())));
+        smsCodeMapper.insert(randomPojo(SmsCodeDO.class, o -> {
+            o.setMobile(reqDTO.getMobile());
+            o.setScene(reqDTO.getScene());
+            o.setCode(reqDTO.getCode());
+            o.setUsed(true);
+            o.setCreateTime(LocalDateTime.now());
+        }));
 
         // 调用，并断言异常
         assertServiceException(() -> smsCodeService.validateSmsCode(reqDTO),

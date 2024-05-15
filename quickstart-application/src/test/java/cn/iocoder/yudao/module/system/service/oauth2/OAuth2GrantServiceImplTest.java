@@ -161,7 +161,8 @@ public class OAuth2GrantServiceImplTest extends BaseMockitoUnitTest {
         String clientId = randomString();
         String accessToken = randomString();
         // mock 方法（访问令牌）
-        OAuth2AccessTokenDO accessTokenDO = randomPojo(OAuth2AccessTokenDO.class).setClientId(clientId);
+        OAuth2AccessTokenDO accessTokenDO = randomPojo(OAuth2AccessTokenDO.class);
+        accessTokenDO.setClientId(clientId);
         when(oauth2TokenService.getAccessToken(eq(accessToken))).thenReturn(accessTokenDO);
         // mock 方法（移除）
         when(oauth2TokenService.removeAccessToken(eq(accessToken))).thenReturn(accessTokenDO);

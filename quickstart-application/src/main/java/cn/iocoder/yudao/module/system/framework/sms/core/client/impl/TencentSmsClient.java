@@ -28,7 +28,7 @@ import static cn.iocoder.yudao.framework.common.util.date.DateUtils.TIME_ZONE_DE
 
 /**
  * 腾讯云短信功能实现
- *
+ * <p>
  * 参见 <a href="https://cloud.tencent.com/document/product/382/52077">文档</a>
  *
  * @author shiwp
@@ -47,7 +47,7 @@ public class TencentSmsClient extends AbstractSmsClient {
 
     /**
      * 是否国际/港澳台短信：
-     *
+     * <p>
      * 0：表示国内短信。
      * 1：表示国际/港澳台短信。
      */
@@ -70,9 +70,9 @@ public class TencentSmsClient extends AbstractSmsClient {
 
     /**
      * 参数校验腾讯云的 SDK AppId
-     *
+     * <p>
      * 原因是：腾讯云发放短信的时候，需要额外的参数 sdkAppId
-     *
+     * <p>
      * 解决方案：考虑到不破坏原有的 apiKey + apiSecret 的结构，所以将 secretId 拼接到 apiKey 字段中，格式为 "secretId sdkAppId"。
      *
      * @param properties 配置
@@ -102,22 +102,35 @@ public class TencentSmsClient extends AbstractSmsClient {
         request.setSignName(properties.getSignature());
         request.setTemplateId(apiTemplateId);
         request.setTemplateParamSet(ArrayUtils.toArray(templateParams, e -> String.valueOf(e.getValue())));
-        request.setSessionContext(JsonUtils.toJsonString(new SessionContext().setLogId(sendLogId)));
+        SessionContext sessionContext = new SessionContext();
+        sessionContext.setLogId(sendLogId);
+        request.setSessionContext(JsonUtils.toJsonString(sessionContext));
         // 执行请求
         SendSmsResponse response = client.SendSms(request);
         SendStatus status = response.getSendStatusSet()[0];
-        return new SmsSendRespDTO().setSuccess(Objects.equals(status.getCode(), API_CODE_SUCCESS)).setSerialNo(status.getSerialNo())
-                .setApiRequestId(response.getRequestId()).setApiCode(status.getCode()).setApiMsg(status.getMessage());
+        SmsSendRespDTO smsSendRespDTO = new SmsSendRespDTO();
+        smsSendRespDTO.setSuccess(Objects.equals(status.getCode(), API_CODE_SUCCESS));
+        smsSendRespDTO.setSerialNo(status.getSerialNo());
+        smsSendRespDTO.setApiRequestId(response.getRequestId());
+        smsSendRespDTO.setApiCode(status.getCode());
+        smsSendRespDTO.setApiMsg(status.getMessage());
+        return smsSendRespDTO;
     }
 
     @Override
     public List<SmsReceiveRespDTO> parseSmsReceiveStatus(String text) {
         List<SmsReceiveStatus> callback = JsonUtils.parseArray(text, SmsReceiveStatus.class);
-        return convertList(callback, status -> new SmsReceiveRespDTO()
-                .setSuccess(SmsReceiveStatus.SUCCESS_CODE.equalsIgnoreCase(status.getStatus()))
-                .setErrorCode(status.getErrCode()).setErrorMsg(status.getDescription())
-                .setMobile(status.getMobile()).setReceiveTime(status.getReceiveTime())
-                .setSerialNo(status.getSerialNo()).setLogId(status.getSessionContext().getLogId()));
+        return convertList(callback, status -> {
+            SmsReceiveRespDTO smsReceiveRespDTO = new SmsReceiveRespDTO();
+            smsReceiveRespDTO.setSuccess(SmsReceiveStatus.SUCCESS_CODE.equalsIgnoreCase(status.getStatus()));
+            smsReceiveRespDTO.setErrorCode(status.getErrCode());
+            smsReceiveRespDTO.setErrorMsg(status.getDescription());
+            smsReceiveRespDTO.setMobile(status.getMobile());
+            smsReceiveRespDTO.setReceiveTime(status.getReceiveTime());
+            smsReceiveRespDTO.setSerialNo(status.getSerialNo());
+            smsReceiveRespDTO.setLogId(status.getSessionContext().getLogId());
+            return smsReceiveRespDTO;
+        });
     }
 
     @Override
@@ -132,8 +145,12 @@ public class TencentSmsClient extends AbstractSmsClient {
         if (status == null || status.getStatusCode() == null) {
             return null;
         }
-        return new SmsTemplateRespDTO().setId(status.getTemplateId().toString()).setContent(status.getTemplateContent())
-                .setAuditStatus(convertSmsTemplateAuditStatus(status.getStatusCode().intValue())).setAuditReason(status.getReviewReply());
+        SmsTemplateRespDTO smsTemplateRespDTO = new SmsTemplateRespDTO();
+        smsTemplateRespDTO.setId(status.getTemplateId().toString());
+        smsTemplateRespDTO.setContent(status.getTemplateContent());
+        smsTemplateRespDTO.setAuditStatus(convertSmsTemplateAuditStatus(status.getStatusCode().intValue()));
+        smsTemplateRespDTO.setAuditReason(status.getReviewReply());
+        return smsTemplateRespDTO;
     }
 
     @VisibleForTesting

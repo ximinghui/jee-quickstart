@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.Resource;
+
 import java.util.List;
 
 /**
@@ -25,16 +26,20 @@ public class SmsProducer {
     /**
      * 发送 {@link SmsSendMessage} 消息
      *
-     * @param logId 短信日志编号
-     * @param mobile 手机号
-     * @param channelId 渠道编号
-     * @param apiTemplateId 短信模板编号
+     * @param logId          短信日志编号
+     * @param mobile         手机号
+     * @param channelId      渠道编号
+     * @param apiTemplateId  短信模板编号
      * @param templateParams 短信模板参数
      */
     public void sendSmsSendMessage(Long logId, String mobile,
                                    Long channelId, String apiTemplateId, List<KeyValue<String, Object>> templateParams) {
-        SmsSendMessage message = new SmsSendMessage().setLogId(logId).setMobile(mobile);
-        message.setChannelId(channelId).setApiTemplateId(apiTemplateId).setTemplateParams(templateParams);
+        SmsSendMessage message = new SmsSendMessage();
+        message.setLogId(logId);
+        message.setMobile(mobile);
+        message.setChannelId(channelId);
+        message.setApiTemplateId(apiTemplateId);
+        message.setTemplateParams(templateParams);
         applicationContext.publishEvent(message);
     }
 

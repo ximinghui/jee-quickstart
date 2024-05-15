@@ -27,6 +27,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import jakarta.servlet.http.HttpServletRequest;
+
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -76,12 +77,13 @@ public class OAuth2OpenControllerTest extends BaseMockitoUnitTest {
         String state = randomString();
         HttpServletRequest request = mockRequest("test_client_id", "test_client_secret");
         // mock 方法（client）
-        OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class).setClientId("test_client_id");
+        OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class);
+        client.setClientId("test_client_id");
         when(oauth2ClientService.validOAuthClientFromCache(eq("test_client_id"), eq("test_client_secret"), eq(granType), eq(new ArrayList<>()), eq(redirectUri))).thenReturn(client);
 
         // mock 方法（访问令牌）
-        OAuth2AccessTokenDO accessTokenDO = randomPojo(OAuth2AccessTokenDO.class)
-                .setExpiresTime(LocalDateTimeUtil.offset(LocalDateTime.now(), 30000L, ChronoUnit.MILLIS));
+        OAuth2AccessTokenDO accessTokenDO = randomPojo(OAuth2AccessTokenDO.class);
+        accessTokenDO.setExpiresTime(LocalDateTimeUtil.offset(LocalDateTime.now(), 30000L, ChronoUnit.MILLIS));
         when(oauth2GrantService.grantAuthorizationCodeForAccessToken(eq("test_client_id"),
                 eq(code), eq(redirectUri), eq(state))).thenReturn(accessTokenDO);
 
@@ -103,13 +105,14 @@ public class OAuth2OpenControllerTest extends BaseMockitoUnitTest {
         String scope = "write read";
         HttpServletRequest request = mockRequest("test_client_id", "test_client_secret");
         // mock 方法（client）
-        OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class).setClientId("test_client_id");
+        OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class);
+        client.setClientId("test_client_id");
         when(oauth2ClientService.validOAuthClientFromCache(eq("test_client_id"), eq("test_client_secret"),
                 eq(granType), eq(Lists.newArrayList("write", "read")), isNull())).thenReturn(client);
 
         // mock 方法（访问令牌）
-        OAuth2AccessTokenDO accessTokenDO = randomPojo(OAuth2AccessTokenDO.class)
-                .setExpiresTime(LocalDateTimeUtil.offset(LocalDateTime.now(), 30000L, ChronoUnit.MILLIS));
+        OAuth2AccessTokenDO accessTokenDO = randomPojo(OAuth2AccessTokenDO.class);
+        accessTokenDO.setExpiresTime(LocalDateTimeUtil.offset(LocalDateTime.now(), 30000L, ChronoUnit.MILLIS));
         when(oauth2GrantService.grantPassword(eq(username), eq(password), eq("test_client_id"),
                 eq(Lists.newArrayList("write", "read")))).thenReturn(accessTokenDO);
 
@@ -130,13 +133,14 @@ public class OAuth2OpenControllerTest extends BaseMockitoUnitTest {
         String password = randomString();
         HttpServletRequest request = mockRequest("test_client_id", "test_client_secret");
         // mock 方法（client）
-        OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class).setClientId("test_client_id");
+        OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class);
+        client.setClientId("test_client_id");
         when(oauth2ClientService.validOAuthClientFromCache(eq("test_client_id"), eq("test_client_secret"),
                 eq(granType), eq(Lists.newArrayList()), isNull())).thenReturn(client);
 
         // mock 方法（访问令牌）
-        OAuth2AccessTokenDO accessTokenDO = randomPojo(OAuth2AccessTokenDO.class)
-                .setExpiresTime(LocalDateTimeUtil.offset(LocalDateTime.now(), 30000L, ChronoUnit.MILLIS));
+        OAuth2AccessTokenDO accessTokenDO = randomPojo(OAuth2AccessTokenDO.class);
+        accessTokenDO.setExpiresTime(LocalDateTimeUtil.offset(LocalDateTime.now(), 30000L, ChronoUnit.MILLIS));
         when(oauth2GrantService.grantRefreshToken(eq(refreshToken), eq("test_client_id"))).thenReturn(accessTokenDO);
 
         // 调用
@@ -163,7 +167,8 @@ public class OAuth2OpenControllerTest extends BaseMockitoUnitTest {
         HttpServletRequest request = mockRequest("demo_client_id", "demo_client_secret");
         String token = randomString();
         // mock 方法（client）
-        OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class).setClientId("demo_client_id");
+        OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class);
+        client.setClientId("demo_client_id");
         when(oauth2ClientService.validOAuthClientFromCache(eq("demo_client_id"),
                 eq("demo_client_secret"), isNull(), isNull(), isNull())).thenReturn(client);
         // mock 方法（移除）
@@ -182,7 +187,9 @@ public class OAuth2OpenControllerTest extends BaseMockitoUnitTest {
         HttpServletRequest request = mockRequest("demo_client_id", "demo_client_secret");
         String token = randomString();
         // mock 方法
-        OAuth2AccessTokenDO accessTokenDO = randomPojo(OAuth2AccessTokenDO.class).setUserType(UserTypeEnum.ADMIN.getValue()).setExpiresTime(LocalDateTimeUtil.of(1653485731195L));
+        OAuth2AccessTokenDO accessTokenDO = randomPojo(OAuth2AccessTokenDO.class);
+        accessTokenDO.setUserType(UserTypeEnum.ADMIN.getValue());
+        accessTokenDO.setExpiresTime(LocalDateTimeUtil.of(1653485731195L));
         when(oauth2TokenService.checkAccessToken(eq(token))).thenReturn(accessTokenDO);
 
         // 调用
@@ -198,12 +205,18 @@ public class OAuth2OpenControllerTest extends BaseMockitoUnitTest {
         // 准备参数
         String clientId = randomString();
         // mock 方法（client）
-        OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class).setClientId("demo_client_id").setScopes(ListUtil.toList("read", "write", "all"));
+        OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class);
+        client.setClientId("demo_client_id");
+        client.setScopes(ListUtil.toList("read", "write", "all"));
         when(oauth2ClientService.validOAuthClientFromCache(eq(clientId))).thenReturn(client);
         // mock 方法（approve）
-        List<OAuth2ApproveDO> approves = asList(
-                randomPojo(OAuth2ApproveDO.class).setScope("read").setApproved(true),
-                randomPojo(OAuth2ApproveDO.class).setScope("write").setApproved(false));
+        OAuth2ApproveDO approve1 = randomPojo(OAuth2ApproveDO.class);
+        OAuth2ApproveDO approve2 = randomPojo(OAuth2ApproveDO.class);
+        approve1.setScope("read");
+        approve2.setScope("write");
+        approve1.setApproved(true);
+        approve2.setApproved(false);
+        List<OAuth2ApproveDO> approves = asList(approve1, approve2);
         when(oauth2ApproveService.getApproveList(isNull(), eq(UserTypeEnum.ADMIN.getValue()), eq(clientId))).thenReturn(approves);
 
         // 调用
@@ -275,15 +288,18 @@ public class OAuth2OpenControllerTest extends BaseMockitoUnitTest {
         String redirectUri = "https://www.iocoder.cn";
         String state = "test";
         // mock 方法（client)
-        OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class).setClientId(clientId).setAdditionalInformation(null);
+        OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class);
+        client.setClientId(clientId);
+        client.setAdditionalInformation(null);
         when(oauth2ClientService.validOAuthClientFromCache(eq(clientId), isNull(), eq("implicit"),
                 eq(asSet("read", "write")), eq(redirectUri))).thenReturn(client);
         // mock 方法（场景一）
         when(oauth2ApproveService.checkForPreApproval(isNull(), eq(UserTypeEnum.ADMIN.getValue()),
                 eq(clientId), eq(SetUtils.asSet("read", "write")))).thenReturn(true);
         // mock 方法（访问令牌）
-        OAuth2AccessTokenDO accessTokenDO = randomPojo(OAuth2AccessTokenDO.class)
-                .setAccessToken("test_access_token").setExpiresTime(LocalDateTimeUtil.offset(LocalDateTime.now(), 30010L, ChronoUnit.MILLIS));
+        OAuth2AccessTokenDO accessTokenDO = randomPojo(OAuth2AccessTokenDO.class);
+        accessTokenDO.setAccessToken("test_access_token");
+        accessTokenDO.setExpiresTime(LocalDateTimeUtil.offset(LocalDateTime.now(), 30010L, ChronoUnit.MILLIS));
         when(oauth2GrantService.grantImplicit(isNull(), eq(UserTypeEnum.ADMIN.getValue()),
                 eq(clientId), eq(ListUtil.toList("read")))).thenReturn(accessTokenDO);
 
@@ -307,7 +323,9 @@ public class OAuth2OpenControllerTest extends BaseMockitoUnitTest {
         String redirectUri = "https://www.iocoder.cn";
         String state = "test";
         // mock 方法（client)
-        OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class).setClientId(clientId).setAdditionalInformation(null);
+        OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class);
+        client.setClientId(clientId);
+        client.setAdditionalInformation(null);
         when(oauth2ClientService.validOAuthClientFromCache(eq(clientId), isNull(), eq("authorization_code"),
                 eq(asSet("read", "write")), eq(redirectUri))).thenReturn(client);
         // mock 方法（场景二）

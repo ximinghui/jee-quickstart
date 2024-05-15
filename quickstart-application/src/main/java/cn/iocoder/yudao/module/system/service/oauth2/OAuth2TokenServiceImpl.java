@@ -145,12 +145,16 @@ public class OAuth2TokenServiceImpl implements OAuth2TokenService {
     }
 
     private OAuth2AccessTokenDO createOAuth2AccessToken(OAuth2RefreshTokenDO refreshTokenDO, OAuth2ClientDO clientDO) {
-        OAuth2AccessTokenDO accessTokenDO = new OAuth2AccessTokenDO().setAccessToken(generateAccessToken())
-                .setUserId(refreshTokenDO.getUserId()).setUserType(refreshTokenDO.getUserType())
-                .setUserInfo(buildUserInfo(refreshTokenDO.getUserId(), refreshTokenDO.getUserType()))
-                .setClientId(clientDO.getClientId()).setScopes(refreshTokenDO.getScopes())
-                .setRefreshToken(refreshTokenDO.getRefreshToken())
-                .setExpiresTime(LocalDateTime.now().plusSeconds(clientDO.getAccessTokenValiditySeconds()));
+        OAuth2AccessTokenDO accessTokenDO = new OAuth2AccessTokenDO();
+
+        accessTokenDO.setAccessToken(generateAccessToken());
+        accessTokenDO.setUserId(refreshTokenDO.getUserId());
+        accessTokenDO.setUserType(refreshTokenDO.getUserType());
+        accessTokenDO.setUserInfo(buildUserInfo(refreshTokenDO.getUserId(), refreshTokenDO.getUserType()));
+        accessTokenDO.setClientId(clientDO.getClientId());
+        accessTokenDO.setScopes(refreshTokenDO.getScopes());
+        accessTokenDO.setRefreshToken(refreshTokenDO.getRefreshToken());
+        accessTokenDO.setExpiresTime(LocalDateTime.now().plusSeconds(clientDO.getAccessTokenValiditySeconds()));
         accessTokenDO.setTenantId(TenantContextHolder.getTenantId()); // 手动设置租户编号，避免缓存到 Redis 的时候，无对应的租户编号
         oauth2AccessTokenMapper.insert(accessTokenDO);
         // 记录到 Redis 中
@@ -170,7 +174,7 @@ public class OAuth2TokenServiceImpl implements OAuth2TokenService {
     /**
      * 加载用户信息，方便 {@link cn.iocoder.yudao.framework.security.core.LoginUser} 获取到昵称、部门等信息
      *
-     * @param userId 用户编号
+     * @param userId   用户编号
      * @param userType 用户类型
      * @return 用户信息
      */

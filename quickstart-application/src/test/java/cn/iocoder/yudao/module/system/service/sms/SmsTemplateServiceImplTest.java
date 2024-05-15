@@ -21,6 +21,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -83,7 +84,8 @@ public class SmsTemplateServiceImplTest extends BaseDbUnitTest {
             o.setContent("正在进行登录操作{operation}，您的验证码是{code}");
             o.setStatus(randomEle(CommonStatusEnum.values()).getStatus()); // 保证 status 的范围
             o.setType(randomEle(SmsTemplateTypeEnum.values()).getType()); // 保证 type 的 范围
-        }).setId(null); // 防止 id 被赋值
+        });
+        reqVO.setId(null); // 防止 id 被赋值
         // mock Channel 的方法
         SmsChannelDO channelDO = randomPojo(SmsChannelDO.class, o -> {
             o.setId(reqVO.getChannelId());

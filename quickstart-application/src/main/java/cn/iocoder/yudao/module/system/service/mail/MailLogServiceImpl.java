@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import jakarta.annotation.Resource;
+
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Objects;
@@ -47,7 +48,7 @@ public class MailLogServiceImpl implements MailLogService {
         MailLogDO.MailLogDOBuilder logDOBuilder = MailLogDO.builder();
         // 根据是否要发送，设置状态
         logDOBuilder.sendStatus(Objects.equals(isSend, true) ? MailSendStatusEnum.INIT.getStatus()
-                : MailSendStatusEnum.IGNORE.getStatus())
+                        : MailSendStatusEnum.IGNORE.getStatus())
                 // 用户信息
                 .userId(userId).userType(userType).toMail(toMail)
                 .accountId(account.getId()).fromMail(account.getMail())
@@ -65,13 +66,21 @@ public class MailLogServiceImpl implements MailLogService {
     public void updateMailSendResult(Long logId, String messageId, Exception exception) {
         // 1. 成功
         if (exception == null) {
-            mailLogMapper.updateById(new MailLogDO().setId(logId).setSendTime(LocalDateTime.now())
-                    .setSendStatus(MailSendStatusEnum.SUCCESS.getStatus()).setSendMessageId(messageId));
+            MailLogDO mailLogDO = new MailLogDO();
+            mailLogDO.setId(logId);
+            mailLogDO.setSendTime(LocalDateTime.now());
+            mailLogDO.setSendStatus(MailSendStatusEnum.SUCCESS.getStatus());
+            mailLogDO.setSendMessageId(messageId);
+            mailLogMapper.updateById(mailLogDO);
             return;
         }
         // 2. 失败
-        mailLogMapper.updateById(new MailLogDO().setId(logId).setSendTime(LocalDateTime.now())
-                .setSendStatus(MailSendStatusEnum.FAILURE.getStatus()).setSendException(getRootCauseMessage(exception)));
+        MailLogDO mailLogDO = new MailLogDO();
+        mailLogDO.setId(logId);
+        mailLogDO.setSendTime(LocalDateTime.now());
+        mailLogDO.setSendStatus(MailSendStatusEnum.FAILURE.getStatus());
+        mailLogDO.setSendException(getRootCauseMessage(exception));
+        mailLogMapper.updateById(mailLogDO);
 
     }
 

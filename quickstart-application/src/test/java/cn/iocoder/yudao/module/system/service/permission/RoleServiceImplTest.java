@@ -16,6 +16,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -50,8 +51,8 @@ public class RoleServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testCreateRole() {
         // 准备参数
-        RoleSaveReqVO reqVO = randomPojo(RoleSaveReqVO.class)
-                .setId(null); // 防止 id 被赋值
+        RoleSaveReqVO reqVO = randomPojo(RoleSaveReqVO.class);
+        reqVO.setId(null); // 防止 id 被赋值
 
         // 调用
         Long roleId = roleService.createRole(reqVO, null);
@@ -259,7 +260,8 @@ public class RoleServiceImplTest extends BaseDbUnitTest {
             RoleDO dbRole = randomPojo(RoleDO.class, o -> o.setStatus(CommonStatusEnum.ENABLE.getStatus()));
             roleMapper.insert(dbRole);
             // 测试 id 不匹配
-            roleMapper.insert(cloneIgnoreId(dbRole, o -> {}));
+            roleMapper.insert(cloneIgnoreId(dbRole, o -> {
+            }));
             // 准备参数
             Collection<Long> ids = singleton(dbRole.getId());
 
@@ -309,7 +311,8 @@ public class RoleServiceImplTest extends BaseDbUnitTest {
                     .thenReturn(roleService);
 
             // mock 数据
-            RoleDO dbRole = randomPojo(RoleDO.class).setCode("super_admin");
+            RoleDO dbRole = randomPojo(RoleDO.class);
+            dbRole.setCode("super_admin");
             roleMapper.insert(dbRole);
             // 准备参数
             Long id = dbRole.getId();
@@ -326,7 +329,8 @@ public class RoleServiceImplTest extends BaseDbUnitTest {
                     .thenReturn(roleService);
 
             // mock 数据
-            RoleDO dbRole = randomPojo(RoleDO.class).setCode("tenant_admin");
+            RoleDO dbRole = randomPojo(RoleDO.class);
+            dbRole.setCode("tenant_admin");
             roleMapper.insert(dbRole);
             // 准备参数
             Long id = dbRole.getId();

@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.util.object.ObjectUtils.cloneIgnoreId;
@@ -42,8 +43,8 @@ public class MailAccountServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testCreateMailAccount_success() {
         // 准备参数
-        MailAccountSaveReqVO reqVO = randomPojo(MailAccountSaveReqVO.class, o -> o.setMail(randomEmail()))
-                .setId(null); // 防止 id 被赋值
+        MailAccountSaveReqVO reqVO = randomPojo(MailAccountSaveReqVO.class, o -> o.setMail(randomEmail()));
+        reqVO.setId(null); // 防止 id 被赋值
 
         // 调用
         Long mailAccountId = mailAccountService.createMailAccount(reqVO);

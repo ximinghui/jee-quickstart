@@ -167,8 +167,11 @@ public class SocialClientServiceImplTest extends BaseDbUnitTest {
         AuthConfig authConfig = (AuthConfig) ReflectUtil.getFieldValue(authRequest, "config");
         when(authRequestFactory.get(eq("WECHAT_MP"))).thenReturn(authRequest);
         // mock 数据
-        SocialClientDO client = randomPojo(SocialClientDO.class, o -> o.setStatus(CommonStatusEnum.DISABLE.getStatus())
-                .setUserType(userType).setSocialType(socialType));
+        SocialClientDO client = randomPojo(SocialClientDO.class, o -> {
+            o.setStatus(CommonStatusEnum.DISABLE.getStatus());
+            o.setUserType(userType);
+            o.setSocialType(socialType);
+        });
         socialClientMapper.insert(client);
 
         // 调用
@@ -189,8 +192,11 @@ public class SocialClientServiceImplTest extends BaseDbUnitTest {
         ReflectUtil.setFieldValue(authRequest, "config", authConfig);
         when(authRequestFactory.get(eq("WECHAT_MP"))).thenReturn(authRequest);
         // mock 数据
-        SocialClientDO client = randomPojo(SocialClientDO.class, o -> o.setStatus(CommonStatusEnum.ENABLE.getStatus())
-                .setUserType(userType).setSocialType(socialType));
+        SocialClientDO client = randomPojo(SocialClientDO.class, o -> {
+            o.setStatus(CommonStatusEnum.ENABLE.getStatus());
+            o.setUserType(userType);
+            o.setSocialType(socialType);
+        });
         socialClientMapper.insert(client);
 
         // 调用
@@ -234,8 +240,11 @@ public class SocialClientServiceImplTest extends BaseDbUnitTest {
         // 准备参数
         Integer userType = randomPojo(UserTypeEnum.class).getValue();
         // mock 数据
-        SocialClientDO client = randomPojo(SocialClientDO.class, o -> o.setStatus(CommonStatusEnum.DISABLE.getStatus())
-                .setUserType(userType).setSocialType(SocialTypeEnum.WECHAT_MP.getType()));
+        SocialClientDO client = randomPojo(SocialClientDO.class, o -> {
+            o.setStatus(CommonStatusEnum.DISABLE.getStatus());
+            o.setUserType(userType);
+            o.setSocialType(SocialTypeEnum.WECHAT_MP.getType());
+        });
         socialClientMapper.insert(client);
 
         // 调用
@@ -249,8 +258,11 @@ public class SocialClientServiceImplTest extends BaseDbUnitTest {
         // 准备参数
         Integer userType = randomPojo(UserTypeEnum.class).getValue();
         // mock 数据
-        SocialClientDO client = randomPojo(SocialClientDO.class, o -> o.setStatus(CommonStatusEnum.ENABLE.getStatus())
-                .setUserType(userType).setSocialType(SocialTypeEnum.WECHAT_MP.getType()));
+        SocialClientDO client = randomPojo(SocialClientDO.class, o -> {
+            o.setStatus(CommonStatusEnum.ENABLE.getStatus());
+            o.setUserType(userType);
+            o.setSocialType(SocialTypeEnum.WECHAT_MP.getType());
+        });
         socialClientMapper.insert(client);
         // mock 方法
         WxMpProperties.ConfigStorage configStorage = mock(WxMpProperties.ConfigStorage.class);
@@ -316,8 +328,11 @@ public class SocialClientServiceImplTest extends BaseDbUnitTest {
         // 准备参数
         Integer userType = randomPojo(UserTypeEnum.class).getValue();
         // mock 数据
-        SocialClientDO client = randomPojo(SocialClientDO.class, o -> o.setStatus(CommonStatusEnum.DISABLE.getStatus())
-                .setUserType(userType).setSocialType(SocialTypeEnum.WECHAT_MINI_APP.getType()));
+        SocialClientDO client = randomPojo(SocialClientDO.class, o -> {
+            o.setStatus(CommonStatusEnum.DISABLE.getStatus());
+            o.setUserType(userType);
+            o.setSocialType(SocialTypeEnum.WECHAT_MINI_APP.getType());
+        });
         socialClientMapper.insert(client);
 
         // 调用
@@ -331,8 +346,11 @@ public class SocialClientServiceImplTest extends BaseDbUnitTest {
         // 准备参数
         Integer userType = randomPojo(UserTypeEnum.class).getValue();
         // mock 数据
-        SocialClientDO client = randomPojo(SocialClientDO.class, o -> o.setStatus(CommonStatusEnum.ENABLE.getStatus())
-                .setUserType(userType).setSocialType(SocialTypeEnum.WECHAT_MINI_APP.getType()));
+        SocialClientDO client = randomPojo(SocialClientDO.class, o -> {
+            o.setStatus(CommonStatusEnum.ENABLE.getStatus());
+            o.setUserType(userType);
+            o.setSocialType(SocialTypeEnum.WECHAT_MINI_APP.getType());
+        });
         socialClientMapper.insert(client);
         // mock 方法
         WxMaProperties.ConfigStorage configStorage = mock(WxMaProperties.ConfigStorage.class);
@@ -351,11 +369,12 @@ public class SocialClientServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testCreateSocialClient_success() {
         // 准备参数
-        SocialClientSaveReqVO reqVO = randomPojo(SocialClientSaveReqVO.class,
-                o -> o.setSocialType(randomEle(SocialTypeEnum.values()).getType())
-                        .setUserType(randomEle(UserTypeEnum.values()).getValue())
-                        .setStatus(randomCommonStatus()))
-                .setId(null); // 防止 id 被赋值
+        SocialClientSaveReqVO reqVO = randomPojo(SocialClientSaveReqVO.class, o -> {
+            o.setSocialType(randomEle(SocialTypeEnum.values()).getType());
+            o.setUserType(randomEle(UserTypeEnum.values()).getValue());
+            o.setStatus(randomCommonStatus());
+        });
+        reqVO.setId(null); // 防止 id 被赋值
 
         // 调用
         Long socialClientId = socialClientService.createSocialClient(reqVO);
@@ -374,9 +393,9 @@ public class SocialClientServiceImplTest extends BaseDbUnitTest {
         // 准备参数
         SocialClientSaveReqVO reqVO = randomPojo(SocialClientSaveReqVO.class, o -> {
             o.setId(dbSocialClient.getId()); // 设置更新的 ID
-            o.setSocialType(randomEle(SocialTypeEnum.values()).getType())
-                    .setUserType(randomEle(UserTypeEnum.values()).getValue())
-                    .setStatus(randomCommonStatus());
+            o.setSocialType(randomEle(SocialTypeEnum.values()).getType());
+            o.setUserType(randomEle(UserTypeEnum.values()).getValue());
+            o.setStatus(randomCommonStatus());
         });
 
         // 调用

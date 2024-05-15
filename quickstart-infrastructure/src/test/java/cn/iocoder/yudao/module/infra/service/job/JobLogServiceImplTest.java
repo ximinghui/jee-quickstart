@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -98,11 +99,11 @@ public class JobLogServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testCleanJobLog() {
         // mock 数据
-        JobLogDO log01 = randomPojo(JobLogDO.class, o -> o.setCreateTime(addTime(Duration.ofDays(-3))))
-                .setExecuteIndex(1);
+        JobLogDO log01 = randomPojo(JobLogDO.class, o -> o.setCreateTime(addTime(Duration.ofDays(-3))));
+        log01.setExecuteIndex(1);
         jobLogMapper.insert(log01);
-        JobLogDO log02 = randomPojo(JobLogDO.class, o -> o.setCreateTime(addTime(Duration.ofDays(-1))))
-                .setExecuteIndex(1);
+        JobLogDO log02 = randomPojo(JobLogDO.class, o -> o.setCreateTime(addTime(Duration.ofDays(-1))));
+        log02.setExecuteIndex(1);
         jobLogMapper.insert(log02);
         // 准备参数
         Integer exceedDay = 2;

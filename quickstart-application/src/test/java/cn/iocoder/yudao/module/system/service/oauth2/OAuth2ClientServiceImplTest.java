@@ -13,6 +13,7 @@ import org.mockito.MockedStatic;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.util.Collections;
 
 import static cn.iocoder.yudao.framework.common.util.object.ObjectUtils.cloneIgnoreId;
@@ -41,9 +42,8 @@ public class OAuth2ClientServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testCreateOAuth2Client_success() {
         // 准备参数
-        OAuth2ClientSaveReqVO reqVO = randomPojo(OAuth2ClientSaveReqVO.class,
-                o -> o.setLogo(randomString()))
-                .setId(null); // 防止 id 被赋值
+        OAuth2ClientSaveReqVO reqVO = randomPojo(OAuth2ClientSaveReqVO.class, o -> o.setLogo(randomString()));
+        reqVO.setId(null); // 防止 id 被赋值
 
         // 调用
         Long oauth2ClientId = oauth2ClientService.createOAuth2Client(reqVO);
@@ -107,7 +107,8 @@ public class OAuth2ClientServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testValidateClientIdExists_withId() {
         // mock 数据
-        OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class).setClientId("tudou");
+        OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class);
+        client.setClientId("tudou");
         oauth2ClientMapper.insert(client);
         // 准备参数
         Long id = randomLongId();
@@ -120,7 +121,8 @@ public class OAuth2ClientServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testValidateClientIdExists_noId() {
         // mock 数据
-        OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class).setClientId("tudou");
+        OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class);
+        client.setClientId("tudou");
         oauth2ClientMapper.insert(client);
         // 准备参数
         String clientId = "tudou";
@@ -187,11 +189,13 @@ public class OAuth2ClientServiceImplTest extends BaseDbUnitTest {
                     .thenReturn(oauth2ClientService);
 
             // mock 方法
-            OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class).setClientId("default")
-                    .setStatus(CommonStatusEnum.ENABLE.getStatus());
+            OAuth2ClientDO client = randomPojo(OAuth2ClientDO.class);
+            client.setClientId("default");
+            client.setStatus(CommonStatusEnum.ENABLE.getStatus());
             oauth2ClientMapper.insert(client);
-            OAuth2ClientDO client02 = randomPojo(OAuth2ClientDO.class).setClientId("disable")
-                    .setStatus(CommonStatusEnum.DISABLE.getStatus());
+            OAuth2ClientDO client02 = randomPojo(OAuth2ClientDO.class);
+            client02.setClientId("disable");
+            client02.setStatus(CommonStatusEnum.DISABLE.getStatus());
             oauth2ClientMapper.insert(client02);
 
             // 调用，并断言

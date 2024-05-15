@@ -71,8 +71,8 @@ class NoticeServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testCreateNotice_success() {
         // 准备参数
-        NoticeSaveReqVO reqVO = randomPojo(NoticeSaveReqVO.class)
-                .setId(null); // 避免 id 被赋值
+        NoticeSaveReqVO reqVO = randomPojo(NoticeSaveReqVO.class);
+        reqVO.setId(null); // 避免 id 被赋值
 
         // 调用
         Long noticeId = noticeService.createNotice(reqVO);

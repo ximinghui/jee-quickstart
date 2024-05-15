@@ -26,6 +26,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
@@ -98,7 +99,10 @@ public class TenantServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testValidTenant_disable() {
         // mock 数据
-        TenantDO tenant = randomPojo(TenantDO.class, o -> o.setId(1L).setStatus(CommonStatusEnum.DISABLE.getStatus()));
+        TenantDO tenant = randomPojo(TenantDO.class, o -> {
+            o.setId(1L);
+            o.setStatus(CommonStatusEnum.DISABLE.getStatus());
+        });
         tenantMapper.insert(tenant);
 
         // 调用，并断言业务异常
@@ -108,8 +112,11 @@ public class TenantServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testValidTenant_expired() {
         // mock 数据
-        TenantDO tenant = randomPojo(TenantDO.class, o -> o.setId(1L).setStatus(CommonStatusEnum.ENABLE.getStatus())
-                .setExpireTime(buildTime(2020, 2, 2)));
+        TenantDO tenant = randomPojo(TenantDO.class, o -> {
+            o.setId(1L);
+            o.setStatus(CommonStatusEnum.ENABLE.getStatus());
+            o.setExpireTime(buildTime(2020, 2, 2));
+        });
         tenantMapper.insert(tenant);
 
         // 调用，并断言业务异常
@@ -119,8 +126,11 @@ public class TenantServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testValidTenant_success() {
         // mock 数据
-        TenantDO tenant = randomPojo(TenantDO.class, o -> o.setId(1L).setStatus(CommonStatusEnum.ENABLE.getStatus())
-                .setExpireTime(LocalDateTime.now().plusDays(1)));
+        TenantDO tenant = randomPojo(TenantDO.class, o -> {
+            o.setId(1L);
+            o.setStatus(CommonStatusEnum.ENABLE.getStatus());
+            o.setExpireTime(LocalDateTime.now().plusDays(1));
+        });
         tenantMapper.insert(tenant);
 
         // 调用，并断言业务异常
@@ -158,7 +168,8 @@ public class TenantServiceImplTest extends BaseDbUnitTest {
             o.setWebsite("https://www.iocoder.cn");
             o.setUsername("yunai");
             o.setPassword("yuanma");
-        }).setId(null); // 设置为 null，方便后面校验
+        });
+        reqVO.setId(null); // 设置为 null，方便后面校验
 
         // 调用
         Long tenantId = tenantService.createTenant(reqVO);
@@ -191,7 +202,10 @@ public class TenantServiceImplTest extends BaseDbUnitTest {
                 o -> o.setMenuIds(asSet(200L, 201L)));
         when(tenantPackageService.validTenantPackage(eq(reqVO.getPackageId()))).thenReturn(tenantPackage);
         // mock 所有角色
-        RoleDO role100 = randomPojo(RoleDO.class, o -> o.setId(100L).setCode(RoleCodeEnum.TENANT_ADMIN.getCode()));
+        RoleDO role100 = randomPojo(RoleDO.class, o -> {
+            o.setId(100L);
+            o.setCode(RoleCodeEnum.TENANT_ADMIN.getCode());
+        });
         role100.setTenantId(dbTenant.getId());
         RoleDO role101 = randomPojo(RoleDO.class, o -> o.setId(101L));
         role101.setTenantId(dbTenant.getId());

@@ -8,6 +8,7 @@ import cn.iocoder.yudao.module.infra.controller.admin.codegen.vo.CodegenCreateLi
 import cn.iocoder.yudao.module.infra.controller.admin.codegen.vo.CodegenUpdateReqVO;
 import cn.iocoder.yudao.module.infra.controller.admin.codegen.vo.column.CodegenColumnSaveReqVO;
 import cn.iocoder.yudao.module.infra.controller.admin.codegen.vo.table.CodegenTablePageReqVO;
+import cn.iocoder.yudao.module.infra.controller.admin.codegen.vo.table.CodegenTableSaveReqVO;
 import cn.iocoder.yudao.module.infra.controller.admin.codegen.vo.table.DatabaseTableRespVO;
 import cn.iocoder.yudao.module.infra.dal.dataobject.codegen.CodegenColumnDO;
 import cn.iocoder.yudao.module.infra.dal.dataobject.codegen.CodegenTableDO;
@@ -30,6 +31,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -82,7 +84,10 @@ public class CodegenServiceImplTest extends BaseDbUnitTest {
         // 准备参数
         Long userId = randomLongId();
         CodegenCreateListReqVO reqVO = randomPojo(CodegenCreateListReqVO.class,
-                o -> o.setDataSourceConfigId(1L).setTableNames(Collections.singletonList("t_yunai")));
+                o -> {
+                    o.setDataSourceConfigId(1L);
+                    o.setTableNames(Collections.singletonList("t_yunai"));
+                });
         // mock 方法（TableInfo）
         TableInfo tableInfo = mock(TableInfo.class);
         when(databaseTableService.getTable(eq(1L), eq("t_yunai")))
@@ -168,9 +173,11 @@ public class CodegenServiceImplTest extends BaseDbUnitTest {
                         .setScene(CodegenSceneEnum.ADMIN.getScene()));
         codegenTableMapper.insert(table);
         // 准备参数
-        CodegenUpdateReqVO updateReqVO = randomPojo(CodegenUpdateReqVO.class,
-                o -> o.getTable().setId(table.getId())
-                        .setTemplateType(CodegenTemplateTypeEnum.SUB.getType()));
+        CodegenUpdateReqVO updateReqVO = randomPojo(CodegenUpdateReqVO.class, o -> {
+            CodegenTableSaveReqVO table1 = o.getTable();
+            table1.setId(table.getId());
+            table1.setTemplateType(CodegenTemplateTypeEnum.SUB.getType());
+        });
 
         // 调用，并断言
         assertServiceException(() -> codegenService.updateCodegen(updateReqVO),
@@ -190,10 +197,12 @@ public class CodegenServiceImplTest extends BaseDbUnitTest {
                         .setScene(CodegenSceneEnum.ADMIN.getScene()));
         codegenTableMapper.insert(masterTable);
         // 准备参数
-        CodegenUpdateReqVO updateReqVO = randomPojo(CodegenUpdateReqVO.class,
-                o -> o.getTable().setId(subTable.getId())
-                        .setTemplateType(CodegenTemplateTypeEnum.SUB.getType())
-                        .setMasterTableId(masterTable.getId()));
+        CodegenUpdateReqVO updateReqVO = randomPojo(CodegenUpdateReqVO.class, o -> {
+            CodegenTableSaveReqVO table = o.getTable();
+            table.setId(subTable.getId());
+            table.setTemplateType(CodegenTemplateTypeEnum.SUB.getType());
+            table.setMasterTableId(masterTable.getId());
+        });
 
         // 调用，并断言
         assertServiceException(() -> codegenService.updateCodegen(updateReqVO),
@@ -212,14 +221,20 @@ public class CodegenServiceImplTest extends BaseDbUnitTest {
         CodegenColumnDO column02 = randomPojo(CodegenColumnDO.class, o -> o.setTableId(table.getId()));
         codegenColumnMapper.insert(column02);
         // 准备参数
-        CodegenUpdateReqVO updateReqVO = randomPojo(CodegenUpdateReqVO.class,
-                o -> o.getTable().setId(table.getId())
-                        .setTemplateType(CodegenTemplateTypeEnum.ONE.getType())
-                        .setScene(CodegenSceneEnum.ADMIN.getScene()));
-        CodegenColumnSaveReqVO columnVO01 = randomPojo(CodegenColumnSaveReqVO.class,
-                o -> o.setId(column01.getId()).setTableId(table.getId()));
-        CodegenColumnSaveReqVO columnVO02 = randomPojo(CodegenColumnSaveReqVO.class,
-                o -> o.setId(column02.getId()).setTableId(table.getId()));
+        CodegenUpdateReqVO updateReqVO = randomPojo(CodegenUpdateReqVO.class, o -> {
+            CodegenTableSaveReqVO table1 = o.getTable();
+            table1.setId(table.getId());
+            table1.setTemplateType(CodegenTemplateTypeEnum.ONE.getType());
+            table1.setScene(CodegenSceneEnum.ADMIN.getScene());
+        });
+        CodegenColumnSaveReqVO columnVO01 = randomPojo(CodegenColumnSaveReqVO.class, o -> {
+            o.setId(column01.getId());
+            o.setTableId(table.getId());
+        });
+        CodegenColumnSaveReqVO columnVO02 = randomPojo(CodegenColumnSaveReqVO.class, o -> {
+            o.setId(column02.getId());
+            o.setTableId(table.getId());
+        });
         updateReqVO.setColumns(Arrays.asList(columnVO01, columnVO02));
 
         // 调用

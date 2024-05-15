@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import jakarta.annotation.Resource;
+
 import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
@@ -110,7 +111,11 @@ public class Demo03StudentServiceImpl implements Demo03StudentService {
 
     private void updateDemo03CourseList(Long studentId, List<Demo03CourseDO> list) {
         deleteDemo03CourseByStudentId(studentId);
-		list.forEach(o -> o.setId(null).setUpdater(null).setUpdateTime(null)); // 解决更新情况下：1）id 冲突；2）updateTime 不更新
+        list.forEach(o -> {
+            o.setId(null);
+            o.setUpdater(null);
+            o.setUpdateTime(null);
+        }); // 解决更新情况下：1）id 冲突；2）updateTime 不更新
         createDemo03CourseList(studentId, list);
     }
 
@@ -161,10 +166,11 @@ public class Demo03StudentServiceImpl implements Demo03StudentService {
 
     private void updateDemo03Grade(Long studentId, Demo03GradeDO demo03Grade) {
         if (demo03Grade == null) {
-			return;
+            return;
         }
         demo03Grade.setStudentId(studentId);
-        demo03Grade.setUpdater(null).setUpdateTime(null); // 解决更新情况下：updateTime 不更新
+        demo03Grade.setUpdater(null);
+        demo03Grade.setUpdateTime(null); // 解决更新情况下：updateTime 不更新
         demo03GradeMapper.insertOrUpdate(demo03Grade);
     }
 

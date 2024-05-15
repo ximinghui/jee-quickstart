@@ -17,6 +17,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.util.List;
 
 import static cn.hutool.core.util.RandomUtil.randomEle;
@@ -58,15 +59,23 @@ public class SocialUserServiceImplTest extends BaseDbUnitTest {
         Long userId = 1L;
         Integer userType = UserTypeEnum.ADMIN.getValue();
         // mock 获得社交用户
-        SocialUserDO socialUser = randomPojo(SocialUserDO.class).setType(SocialTypeEnum.GITEE.getType());
+        SocialUserDO socialUser = randomPojo(SocialUserDO.class);
+        socialUser.setType(SocialTypeEnum.GITEE.getType());
         socialUserMapper.insert(socialUser); // 可被查到
         socialUserMapper.insert(randomPojo(SocialUserDO.class)); // 不可被查到
         // mock 获得绑定
-        socialUserBindMapper.insert(randomPojo(SocialUserBindDO.class) // 可被查询到
-                .setUserId(userId).setUserType(userType).setSocialType(SocialTypeEnum.GITEE.getType())
-                .setSocialUserId(socialUser.getId()));
-        socialUserBindMapper.insert(randomPojo(SocialUserBindDO.class) // 不可被查询到
-                .setUserId(2L).setUserType(userType).setSocialType(SocialTypeEnum.DINGTALK.getType()));
+        SocialUserBindDO socialUserBindDO1 = randomPojo(SocialUserBindDO.class);// 可被查询到
+        socialUserBindDO1.setUserId(userId);
+        socialUserBindDO1.setUserType(userType);
+        socialUserBindDO1.setSocialType(SocialTypeEnum.GITEE.getType());
+        socialUserBindDO1.setSocialUserId(socialUser.getId());
+        socialUserBindMapper.insert(socialUserBindDO1);
+
+        SocialUserBindDO socialUserBindDO2 = randomPojo(SocialUserBindDO.class);// 不可被查询到
+        socialUserBindDO2.setUserId(2L);
+        socialUserBindDO2.setUserType(userType);
+        socialUserBindDO2.setSocialType(SocialTypeEnum.DINGTALK.getType());
+        socialUserBindMapper.insert(socialUserBindDO2);
 
         // 调用
         List<SocialUserDO> result = socialUserService.getSocialUserList(userId, userType);
@@ -78,19 +87,31 @@ public class SocialUserServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testBindSocialUser() {
         // 准备参数
-        SocialUserBindReqDTO reqDTO = new SocialUserBindReqDTO()
-                .setUserId(1L).setUserType(UserTypeEnum.ADMIN.getValue())
-                .setSocialType(SocialTypeEnum.GITEE.getType()).setCode("test_code").setState("test_state");
+        SocialUserBindReqDTO reqDTO = new SocialUserBindReqDTO();
+        reqDTO.setUserId(1L);
+        reqDTO.setUserType(UserTypeEnum.ADMIN.getValue());
+        reqDTO.setSocialType(SocialTypeEnum.GITEE.getType());
+        reqDTO.setCode("test_code");
+        reqDTO.setState("test_state");
         // mock 数据：获得社交用户
-        SocialUserDO socialUser = randomPojo(SocialUserDO.class).setType(reqDTO.getSocialType())
-                .setCode(reqDTO.getCode()).setState(reqDTO.getState());
+        SocialUserDO socialUser = randomPojo(SocialUserDO.class);
+        socialUser.setType(reqDTO.getSocialType());
+        socialUser.setCode(reqDTO.getCode());
+        socialUser.setState(reqDTO.getState());
         socialUserMapper.insert(socialUser);
         // mock 数据：用户可能之前已经绑定过该社交类型
-        socialUserBindMapper.insert(randomPojo(SocialUserBindDO.class).setUserId(1L).setUserType(UserTypeEnum.ADMIN.getValue())
-                .setSocialType(SocialTypeEnum.GITEE.getType()).setSocialUserId(-1L));
+        SocialUserBindDO socialUserBindDO1 = randomPojo(SocialUserBindDO.class);
+        socialUserBindDO1.setUserId(1L);
+        socialUserBindDO1.setUserType(UserTypeEnum.ADMIN.getValue());
+        socialUserBindDO1.setSocialType(SocialTypeEnum.GITEE.getType());
+        socialUserBindDO1.setSocialUserId(-1L);
+        socialUserBindMapper.insert(socialUserBindDO1);
         // mock 数据：社交用户可能之前绑定过别的用户
-        socialUserBindMapper.insert(randomPojo(SocialUserBindDO.class).setUserType(UserTypeEnum.ADMIN.getValue())
-                .setSocialType(SocialTypeEnum.GITEE.getType()).setSocialUserId(socialUser.getId()));
+        SocialUserBindDO socialUserBindDO2 = randomPojo(SocialUserBindDO.class);
+        socialUserBindDO2.setUserType(UserTypeEnum.ADMIN.getValue());
+        socialUserBindDO2.setSocialType(SocialTypeEnum.GITEE.getType());
+        socialUserBindDO2.setSocialUserId(socialUser.getId());
+        socialUserBindMapper.insert(socialUserBindDO2);
 
         // 调用
         String openid = socialUserService.bindSocialUser(reqDTO);
@@ -108,11 +129,15 @@ public class SocialUserServiceImplTest extends BaseDbUnitTest {
         Integer type = SocialTypeEnum.GITEE.getType();
         String openid = "test_openid";
         // mock 数据：社交用户
-        SocialUserDO socialUser = randomPojo(SocialUserDO.class).setType(type).setOpenid(openid);
+        SocialUserDO socialUser = randomPojo(SocialUserDO.class);
+        socialUser.setType(type);
+        socialUser.setOpenid(openid);
         socialUserMapper.insert(socialUser);
         // mock 数据：社交绑定关系
-        SocialUserBindDO socialUserBind = randomPojo(SocialUserBindDO.class).setUserType(userType)
-                .setUserId(userId).setSocialType(type);
+        SocialUserBindDO socialUserBind = randomPojo(SocialUserBindDO.class);
+        socialUserBind.setUserType(userType);
+        socialUserBind.setUserId(userId);
+        socialUserBind.setSocialType(type);
         socialUserBindMapper.insert(socialUserBind);
 
         // 调用
@@ -138,12 +163,18 @@ public class SocialUserServiceImplTest extends BaseDbUnitTest {
         String code = "tudou";
         String state = "yuanma";
         // mock 社交用户
-        SocialUserDO socialUserDO = randomPojo(SocialUserDO.class).setType(type).setCode(code).setState(state);
+        SocialUserDO socialUserDO = randomPojo(SocialUserDO.class);
+        socialUserDO.setType(type);
+        socialUserDO.setCode(code);
+        socialUserDO.setState(state);
         socialUserMapper.insert(socialUserDO);
         // mock 社交用户的绑定
         Long userId = randomLong();
-        SocialUserBindDO socialUserBind = randomPojo(SocialUserBindDO.class).setUserType(userType).setUserId(userId)
-                .setSocialType(type).setSocialUserId(socialUserDO.getId());
+        SocialUserBindDO socialUserBind = randomPojo(SocialUserBindDO.class);
+        socialUserBind.setUserType(userType);
+        socialUserBind.setUserId(userId);
+        socialUserBind.setSocialType(type);
+        socialUserBind.setSocialUserId(socialUserDO.getId());
         socialUserBindMapper.insert(socialUserBind);
 
         // 调用
@@ -161,7 +192,10 @@ public class SocialUserServiceImplTest extends BaseDbUnitTest {
         String code = "tudou";
         String state = "yuanma";
         // mock 方法
-        SocialUserDO socialUser = randomPojo(SocialUserDO.class).setType(socialType).setCode(code).setState(state);
+        SocialUserDO socialUser = randomPojo(SocialUserDO.class);
+        socialUser.setType(socialType);
+        socialUser.setCode(code);
+        socialUser.setState(state);
         socialUserMapper.insert(socialUser);
 
         // 调用
@@ -174,7 +208,11 @@ public class SocialUserServiceImplTest extends BaseDbUnitTest {
     public void testAuthSocialUser_notNull() {
         // mock 数据
         SocialUserDO socialUser = randomPojo(SocialUserDO.class,
-                o -> o.setType(SocialTypeEnum.GITEE.getType()).setCode("tudou").setState("yuanma"));
+                o -> {
+                    o.setType(SocialTypeEnum.GITEE.getType());
+                    o.setCode("tudou");
+                    o.setState("yuanma");
+                });
         socialUserMapper.insert(socialUser);
         // 准备参数
         Integer socialType = SocialTypeEnum.GITEE.getType();
@@ -215,7 +253,10 @@ public class SocialUserServiceImplTest extends BaseDbUnitTest {
         String code = "tudou";
         String state = "yuanma";
         // mock 数据
-        socialUserMapper.insert(randomPojo(SocialUserDO.class).setType(socialType).setOpenid("test_openid"));
+        SocialUserDO socialUserDO = randomPojo(SocialUserDO.class);
+        socialUserDO.setType(socialType);
+        socialUserDO.setOpenid("test_openid");
+        socialUserMapper.insert(socialUserDO);
         // mock 方法
         AuthUser authUser = randomPojo(AuthUser.class);
         when(socialClientService.getAuthUser(eq(socialType), eq(userType), eq(code), eq(state))).thenReturn(authUser);

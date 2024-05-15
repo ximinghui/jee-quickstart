@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.util.function.Consumer;
 
 import static cn.hutool.core.util.RandomUtil.randomEle;
@@ -37,8 +38,8 @@ public class ConfigServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testCreateConfig_success() {
         // 准备参数
-        ConfigSaveReqVO reqVO = randomPojo(ConfigSaveReqVO.class)
-                .setId(null); // 防止 id 被赋值，导致唯一性校验失败
+        ConfigSaveReqVO reqVO = randomPojo(ConfigSaveReqVO.class);
+        reqVO.setId(null); // 防止 id 被赋值，导致唯一性校验失败
 
         // 调用
         Long configId = configService.createConfig(reqVO);

@@ -27,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import jakarta.annotation.Resource;
+
 import java.util.*;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
@@ -58,10 +59,10 @@ public class RoleServiceImpl implements RoleService {
         validateRoleDuplicate(createReqVO.getName(), createReqVO.getCode(), null);
 
         // 2. 插入到数据库
-        RoleDO role = BeanUtils.toBean(createReqVO, RoleDO.class)
-                .setType(ObjectUtil.defaultIfNull(type, RoleTypeEnum.CUSTOM.getType()))
-                .setStatus(CommonStatusEnum.ENABLE.getStatus())
-                .setDataScope(DataScopeEnum.ALL.getScope()); // 默认可查看所有数据。原因是，可能一些项目不需要项目权限
+        RoleDO role = BeanUtils.toBean(createReqVO, RoleDO.class);
+        role.setType(ObjectUtil.defaultIfNull(type, RoleTypeEnum.CUSTOM.getType()));
+        role.setStatus(CommonStatusEnum.ENABLE.getStatus());
+        role.setDataScope(DataScopeEnum.ALL.getScope()); // 默认可查看所有数据。原因是，可能一些项目不需要项目权限
         roleMapper.insert(role);
 
         // 3. 记录操作日志上下文
@@ -121,13 +122,13 @@ public class RoleServiceImpl implements RoleService {
 
     /**
      * 校验角色的唯一字段是否重复
-     *
+     * <p>
      * 1. 是否存在相同名字的角色
      * 2. 是否存在相同编码的角色
      *
      * @param name 角色名字
      * @param code 角色额编码
-     * @param id 角色编号
+     * @param id   角色编号
      */
     @VisibleForTesting
     void validateRoleDuplicate(String name, String code, Long id) {

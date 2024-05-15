@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import jakarta.annotation.Resource;
+
 import java.time.LocalDateTime;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
@@ -32,8 +33,8 @@ public class ApiErrorLogServiceImpl implements ApiErrorLogService {
 
     @Override
     public void createApiErrorLog(ApiErrorLogCreateReqDTO createDTO) {
-        ApiErrorLogDO apiErrorLog = BeanUtils.toBean(createDTO, ApiErrorLogDO.class)
-                .setProcessStatus(ApiErrorLogProcessStatusEnum.INIT.getStatus());
+        ApiErrorLogDO apiErrorLog = BeanUtils.toBean(createDTO, ApiErrorLogDO.class);
+        apiErrorLog.setProcessStatus(ApiErrorLogProcessStatusEnum.INIT.getStatus());
         apiErrorLogMapper.insert(apiErrorLog);
     }
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import jakarta.annotation.Resource;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -97,10 +98,13 @@ public class DataSourceConfigServiceImpl implements DataSourceConfigService {
     private DataSourceConfigDO buildMasterDataSourceConfig() {
         String primary = dynamicDataSourceProperties.getPrimary();
         DataSourceProperty dataSourceProperty = dynamicDataSourceProperties.getDatasource().get(primary);
-        return new DataSourceConfigDO().setId(DataSourceConfigDO.ID_MASTER).setName(primary)
-                .setUrl(dataSourceProperty.getUrl())
-                .setUsername(dataSourceProperty.getUsername())
-                .setPassword(dataSourceProperty.getPassword());
+        DataSourceConfigDO configDO = new DataSourceConfigDO();
+        configDO.setId(DataSourceConfigDO.ID_MASTER);
+        configDO.setName(primary);
+        configDO.setUrl(dataSourceProperty.getUrl());
+        configDO.setUsername(dataSourceProperty.getUsername());
+        configDO.setPassword(dataSourceProperty.getPassword());
+        return configDO;
     }
 
 }

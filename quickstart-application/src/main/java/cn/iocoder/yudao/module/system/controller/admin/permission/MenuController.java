@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
+
 import java.util.Comparator;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class MenuController {
 
     @DeleteMapping("/delete")
     @Operation(summary = "删除菜单")
-    @Parameter(name = "id", description = "菜单编号", required= true, example = "1024")
+    @Parameter(name = "id", description = "菜单编号", required = true, example = "1024")
     @PreAuthorize("@ss.hasPermission('system:menu:delete')")
     public CommonResult<Boolean> deleteMenu(@RequestParam("id") Long id) {
         menuService.deleteMenu(id);
@@ -70,8 +71,9 @@ public class MenuController {
     @Operation(summary = "获取菜单精简信息列表", description = "只包含被开启的菜单，用于【角色分配菜单】功能的选项。" +
             "在多租户的场景下，会只返回租户所在套餐有的菜单")
     public CommonResult<List<MenuSimpleRespVO>> getSimpleMenuList() {
-        List<MenuDO> list = menuService.getMenuListByTenant(
-                new MenuListReqVO().setStatus(CommonStatusEnum.ENABLE.getStatus()));
+        MenuListReqVO menuListReqVO = new MenuListReqVO();
+        menuListReqVO.setStatus(CommonStatusEnum.ENABLE.getStatus());
+        List<MenuDO> list = menuService.getMenuListByTenant(menuListReqVO);
         list.sort(Comparator.comparing(MenuDO::getSort));
         return success(BeanUtils.toBean(list, MenuSimpleRespVO.class));
     }

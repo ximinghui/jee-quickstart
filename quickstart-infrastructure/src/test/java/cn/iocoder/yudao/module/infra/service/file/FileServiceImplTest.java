@@ -98,7 +98,10 @@ public class FileServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testDeleteFile_success() throws Exception {
         // mock 数据
-        FileDO dbFile = randomPojo(FileDO.class, o -> o.setConfigId(10L).setPath("tudou.jpg"));
+        FileDO dbFile = randomPojo(FileDO.class, o -> {
+            o.setConfigId(10L);
+            o.setPath("tudou.jpg");
+        });
         fileMapper.insert(dbFile);// @Sql: 先插入出一条存在的数据
         // mock Master 文件客户端
         FileClient client = mock(FileClient.class);

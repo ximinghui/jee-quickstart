@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,9 +41,8 @@ public class NotifyTemplateServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testCreateNotifyTemplate_success() {
         // 准备参数
-        NotifyTemplateSaveReqVO reqVO = randomPojo(NotifyTemplateSaveReqVO.class,
-                o -> o.setStatus(randomCommonStatus()))
-                .setId(null); // 防止 id 被赋值
+        NotifyTemplateSaveReqVO reqVO = randomPojo(NotifyTemplateSaveReqVO.class, o -> o.setStatus(randomCommonStatus()));
+        reqVO.setId(null); // 防止 id 被赋值
 
         // 调用
         Long notifyTemplateId = notifyTemplateService.createNotifyTemplate(reqVO);

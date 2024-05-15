@@ -8,6 +8,7 @@ import cn.iocoder.yudao.framework.common.util.servlet.ServletUtils;
 import cn.iocoder.yudao.framework.common.util.validation.ValidationUtils;
 import cn.iocoder.yudao.module.system.api.logger.dto.LoginLogCreateReqDTO;
 import cn.iocoder.yudao.module.system.api.sms.SmsCodeApi;
+import cn.iocoder.yudao.module.system.api.sms.dto.code.SmsCodeSendReqDTO;
 import cn.iocoder.yudao.module.system.api.social.dto.SocialUserBindReqDTO;
 import cn.iocoder.yudao.module.system.api.social.dto.SocialUserRespDTO;
 import cn.iocoder.yudao.module.system.controller.admin.auth.vo.*;
@@ -33,6 +34,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.annotation.Resource;
 import jakarta.validation.Validator;
+
 import java.util.Objects;
 
 import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
@@ -115,8 +117,10 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         if (userService.getUserByMobile(reqVO.getMobile()) == null) {
             throw exception(AUTH_MOBILE_NOT_EXISTS);
         }
+        SmsCodeSendReqDTO smsCodeSendReqDTO = AuthConvert.INSTANCE.convert(reqVO);
+        smsCodeSendReqDTO.setCreateIp(getClientIP());
         // 发送验证码
-        smsCodeApi.sendSmsCode(AuthConvert.INSTANCE.convert(reqVO).setCreateIp(getClientIP()));
+        smsCodeApi.sendSmsCode(smsCodeSendReqDTO);
     }
 
     @Override

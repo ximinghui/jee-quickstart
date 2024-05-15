@@ -30,7 +30,7 @@ public class SmsClientFactoryImpl implements SmsClientFactory {
     /**
      * 短信客户端 Map
      * key：渠道编码，使用 {@link SmsChannelProperties#getCode()} ()}
-     *
+     * <p>
      * 注意，一些场景下，需要获得某个渠道类型的客户端，所以需要使用它。
      * 例如说，解析短信接收结果，是相对通用的，不需要使用某个渠道编号的 {@link #channelIdClients}
      */
@@ -40,8 +40,10 @@ public class SmsClientFactoryImpl implements SmsClientFactory {
         // 初始化 channelCodeClients 集合
         Arrays.stream(SmsChannelEnum.values()).forEach(channel -> {
             // 创建一个空的 SmsChannelProperties 对象
-            SmsChannelProperties properties = new SmsChannelProperties().setCode(channel.getCode())
-                    .setApiKey("default default").setApiSecret("default");
+            SmsChannelProperties properties = new SmsChannelProperties();
+            properties.setCode(channel.getCode());
+            properties.setApiKey("default default");
+            properties.setApiSecret("default");
             // 创建 Sms 客户端
             AbstractSmsClient smsClient = createSmsClient(properties);
             channelCodeClients.put(channel.getCode(), smsClient);

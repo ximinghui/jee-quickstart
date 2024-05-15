@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.util.List;
 
 import static cn.iocoder.yudao.framework.test.core.util.RandomUtils.randomLongId;
@@ -32,8 +33,10 @@ public class DatabaseTableServiceImplTest extends BaseDbUnitTest {
         // 准备参数
         Long dataSourceConfigId = randomLongId();
         // mock 方法
-        DataSourceConfigDO dataSourceConfig = new DataSourceConfigDO().setUsername("sa").setPassword("")
-                .setUrl("jdbc:h2:mem:testdb");
+        DataSourceConfigDO dataSourceConfig = new DataSourceConfigDO();
+        dataSourceConfig.setUsername("sa");
+        dataSourceConfig.setPassword("");
+        dataSourceConfig.setUrl("jdbc:h2:mem:testdb");
         when(dataSourceConfigService.getDataSourceConfig(eq(dataSourceConfigId)))
                 .thenReturn(dataSourceConfig);
 
@@ -50,8 +53,10 @@ public class DatabaseTableServiceImplTest extends BaseDbUnitTest {
         // 准备参数
         Long dataSourceConfigId = randomLongId();
         // mock 方法
-        DataSourceConfigDO dataSourceConfig = new DataSourceConfigDO().setUsername("sa").setPassword("")
-                .setUrl("jdbc:h2:mem:testdb");
+        DataSourceConfigDO dataSourceConfig = new DataSourceConfigDO();
+        dataSourceConfig.setUsername("sa");
+        dataSourceConfig.setPassword("");
+        dataSourceConfig.setUrl("jdbc:h2:mem:testdb");
         when(dataSourceConfigService.getDataSourceConfig(eq(dataSourceConfigId)))
                 .thenReturn(dataSourceConfig);
 

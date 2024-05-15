@@ -23,7 +23,7 @@ import java.util.Objects;
 
 /**
  * 基于钉钉 WebHook 实现的调试的短信客户端实现类
- *
+ * <p>
  * 考虑到省钱，我们使用钉钉 WebHook 模拟发送短信，方便调试。
  *
  * @author 芋道源码
@@ -55,13 +55,17 @@ public class DebugDingTalkSmsClient extends AbstractSmsClient {
         // 解析结果
         Map<?, ?> responseObj = JsonUtils.parseObject(responseText, Map.class);
         String errorCode = MapUtil.getStr(responseObj, "errcode");
-        return new SmsSendRespDTO().setSuccess(Objects.equals(errorCode, "0")).setSerialNo(StrUtil.uuid())
-                .setApiCode(errorCode).setApiMsg(MapUtil.getStr(responseObj, "errorMsg"));
+        SmsSendRespDTO smsSendRespDTO = new SmsSendRespDTO();
+        smsSendRespDTO.setSuccess(Objects.equals(errorCode, "0"));
+        smsSendRespDTO.setSerialNo(StrUtil.uuid());
+        smsSendRespDTO.setApiCode(errorCode);
+        smsSendRespDTO.setApiMsg(MapUtil.getStr(responseObj, "errorMsg"));
+        return smsSendRespDTO;
     }
 
     /**
      * 构建请求地址
-     *
+     * <p>
      * 参见 <a href="https://developers.dingtalk.com/document/app/custom-robot-access/title-nfv-794-g71">文档</a>
      *
      * @param path 请求路径
@@ -88,8 +92,12 @@ public class DebugDingTalkSmsClient extends AbstractSmsClient {
 
     @Override
     public SmsTemplateRespDTO getSmsTemplate(String apiTemplateId) {
-        return new SmsTemplateRespDTO().setId(apiTemplateId).setContent("")
-                .setAuditStatus(SmsTemplateAuditStatusEnum.SUCCESS.getStatus()).setAuditReason("");
+        SmsTemplateRespDTO smsTemplateRespDTO = new SmsTemplateRespDTO();
+        smsTemplateRespDTO.setId(apiTemplateId);
+        smsTemplateRespDTO.setContent("");
+        smsTemplateRespDTO.setAuditStatus(SmsTemplateAuditStatusEnum.SUCCESS.getStatus());
+        smsTemplateRespDTO.setAuditReason("");
+        return smsTemplateRespDTO;
     }
 
 }

@@ -45,17 +45,20 @@ public class RabbitMQWebSocketMessageSender extends AbstractWebSocketMessageSend
     /**
      * 通过 RabbitMQ 广播消息
      *
-     * @param sessionId Session 编号
-     * @param userId 用户编号
-     * @param userType 用户类型
-     * @param messageType 消息类型
+     * @param sessionId      Session 编号
+     * @param userId         用户编号
+     * @param userType       用户类型
+     * @param messageType    消息类型
      * @param messageContent 消息内容
      */
     private void sendRabbitMQMessage(String sessionId, Long userId, Integer userType,
                                      String messageType, String messageContent) {
-        RabbitMQWebSocketMessage mqMessage = new RabbitMQWebSocketMessage()
-                .setSessionId(sessionId).setUserId(userId).setUserType(userType)
-                .setMessageType(messageType).setMessageContent(messageContent);
+        RabbitMQWebSocketMessage mqMessage = new RabbitMQWebSocketMessage();
+        mqMessage.setSessionId(sessionId);
+        mqMessage.setUserId(userId);
+        mqMessage.setUserType(userType);
+        mqMessage.setMessageType(messageType);
+        mqMessage.setMessageContent(messageContent);
         rabbitTemplate.convertAndSend(topicExchange.getName(), null, mqMessage);
     }
 

@@ -24,6 +24,7 @@ import org.springframework.validation.annotation.Validated;
 
 import jakarta.annotation.Resource;
 import jakarta.validation.Validator;
+
 import java.time.Duration;
 import java.util.Map;
 import java.util.Objects;
@@ -50,7 +51,7 @@ public class FileConfigServiceImpl implements FileConfigService {
      */
     @Getter
     private final LoadingCache<Long, FileClient> clientCache = buildAsyncReloadingCache(Duration.ofSeconds(10L),
-            new CacheLoader<Long, FileClient>() {
+            new CacheLoader<>() {
 
                 @Override
                 public FileClient load(Long id) {
@@ -75,9 +76,9 @@ public class FileConfigServiceImpl implements FileConfigService {
 
     @Override
     public Long createFileConfig(FileConfigSaveReqVO createReqVO) {
-        FileConfigDO fileConfig = FileConfigConvert.INSTANCE.convert(createReqVO)
-                .setConfig(parseClientConfig(createReqVO.getStorage(), createReqVO.getConfig()))
-                .setMaster(false); // 默认非 master
+        FileConfigDO fileConfig = FileConfigConvert.INSTANCE.convert(createReqVO);
+        fileConfig.setConfig(parseClientConfig(createReqVO.getStorage(), createReqVO.getConfig()));
+        fileConfig.setMaster(false); // 默认非 master
         fileConfigMapper.insert(fileConfig);
         return fileConfig.getId();
     }
@@ -87,8 +88,8 @@ public class FileConfigServiceImpl implements FileConfigService {
         // 校验存在
         FileConfigDO config = validateFileConfigExists(updateReqVO.getId());
         // 更新
-        FileConfigDO updateObj = FileConfigConvert.INSTANCE.convert(updateReqVO)
-                .setConfig(parseClientConfig(config.getStorage(), updateReqVO.getConfig()));
+        FileConfigDO updateObj = FileConfigConvert.INSTANCE.convert(updateReqVO);
+        updateObj.setConfig(parseClientConfig(config.getStorage(), updateReqVO.getConfig()));
         fileConfigMapper.updateById(updateObj);
 
         // 清空缓存
@@ -100,10 +101,17 @@ public class FileConfigServiceImpl implements FileConfigService {
     public void updateFileConfigMaster(Long id) {
         // 校验存在
         validateFileConfigExists(id);
+
         // 更新其它为非 master
-        fileConfigMapper.updateBatch(new FileConfigDO().setMaster(false));
+        FileConfigDO configDO1 = new FileConfigDO();
+        configDO1.setMaster(false);
+        fileConfigMapper.updateBatch(configDO1);
+
         // 更新
-        fileConfigMapper.updateById(new FileConfigDO().setId(id).setMaster(true));
+        FileConfigDO configDO2 = new FileConfigDO();
+        configDO2.setId(id);
+        configDO2.setMaster(true);
+        fileConfigMapper.updateById(configDO2);
 
         // 清空缓存
         clearCache(null, true);
@@ -137,7 +145,7 @@ public class FileConfigServiceImpl implements FileConfigService {
     /**
      * 清空指定文件配置
      *
-     * @param id 配置编号
+     * @param id     配置编号
      * @param master 是否主配置
      */
     private void clearCache(Long id, Boolean master) {

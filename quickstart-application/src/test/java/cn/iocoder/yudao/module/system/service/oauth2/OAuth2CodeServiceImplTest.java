@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -72,8 +73,9 @@ class OAuth2CodeServiceImplTest extends BaseDbUnitTest {
         // 准备参数
         String code = "test_code";
         // mock 数据
-        OAuth2CodeDO codeDO = randomPojo(OAuth2CodeDO.class).setCode(code)
-                .setExpiresTime(LocalDateTime.now().minusDays(1));
+        OAuth2CodeDO codeDO = randomPojo(OAuth2CodeDO.class);
+        codeDO.setCode(code);
+        codeDO.setExpiresTime(LocalDateTime.now().minusDays(1));
         oauth2CodeMapper.insert(codeDO);
 
         // 调用，并断言
@@ -86,8 +88,9 @@ class OAuth2CodeServiceImplTest extends BaseDbUnitTest {
         // 准备参数
         String code = "test_code";
         // mock 数据
-        OAuth2CodeDO codeDO = randomPojo(OAuth2CodeDO.class).setCode(code)
-                .setExpiresTime(LocalDateTime.now().plusDays(1));
+        OAuth2CodeDO codeDO = randomPojo(OAuth2CodeDO.class);
+        codeDO.setCode(code);
+        codeDO.setExpiresTime(LocalDateTime.now().plusDays(1));
         oauth2CodeMapper.insert(codeDO);
 
         // 调用

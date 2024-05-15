@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
@@ -42,9 +43,8 @@ public class PostServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testCreatePost_success() {
         // 准备参数
-        PostSaveReqVO reqVO = randomPojo(PostSaveReqVO.class,
-                o -> o.setStatus(randomEle(CommonStatusEnum.values()).getStatus()))
-                .setId(null); // 防止 id 被设置
+        PostSaveReqVO reqVO = randomPojo(PostSaveReqVO.class, o -> o.setStatus(randomEle(CommonStatusEnum.values()).getStatus()));
+        reqVO.setId(null); // 防止 id 被设置
         // 调用
         Long postId = postService.createPost(reqVO);
 
@@ -103,8 +103,8 @@ public class PostServiceImplTest extends BaseDbUnitTest {
         postMapper.insert(postDO);// @Sql: 先插入出一条存在的数据
         // 准备参数
         PostSaveReqVO reqVO = randomPojo(PostSaveReqVO.class,
-            // 模拟 name 重复
-            o -> o.setName(postDO.getName()));
+                // 模拟 name 重复
+                o -> o.setName(postDO.getName()));
         assertServiceException(() -> postService.createPost(reqVO), POST_NAME_DUPLICATE);
     }
 
@@ -206,7 +206,8 @@ public class PostServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testValidatePostList_success() {
         // mock 数据
-        PostDO postDO = randomPostDO().setStatus(CommonStatusEnum.ENABLE.getStatus());
+        PostDO postDO = randomPostDO();
+        postDO.setStatus(CommonStatusEnum.ENABLE.getStatus());
         postMapper.insert(postDO);
         // 准备参数
         List<Long> ids = singletonList(postDO.getId());
@@ -227,7 +228,8 @@ public class PostServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testValidatePostList_notEnable() {
         // mock 数据
-        PostDO postDO = randomPostDO().setStatus(CommonStatusEnum.DISABLE.getStatus());
+        PostDO postDO = randomPostDO();
+        postDO.setStatus(CommonStatusEnum.DISABLE.getStatus());
         postMapper.insert(postDO);
         // 准备参数
         List<Long> ids = singletonList(postDO.getId());

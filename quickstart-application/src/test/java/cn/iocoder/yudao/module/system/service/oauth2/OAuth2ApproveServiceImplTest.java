@@ -14,6 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -52,8 +53,9 @@ public class OAuth2ApproveServiceImplTest extends BaseDbUnitTest {
         String clientId = randomString();
         List<String> requestedScopes = Lists.newArrayList("read");
         // mock 方法
-        when(oauth2ClientService.validOAuthClientFromCache(eq(clientId)))
-                .thenReturn(randomPojo(OAuth2ClientDO.class).setAutoApproveScopes(requestedScopes));
+        OAuth2ClientDO oAuth2ClientDO = randomPojo(OAuth2ClientDO.class);
+        oAuth2ClientDO.setAutoApproveScopes(requestedScopes);
+        when(oauth2ClientService.validOAuthClientFromCache(eq(clientId))).thenReturn(oAuth2ClientDO);
 
         // 调用
         boolean success = oauth2ApproveService.checkForPreApproval(userId, userType,
@@ -78,12 +80,17 @@ public class OAuth2ApproveServiceImplTest extends BaseDbUnitTest {
         String clientId = randomString();
         List<String> requestedScopes = Lists.newArrayList("read");
         // mock 方法
-        when(oauth2ClientService.validOAuthClientFromCache(eq(clientId)))
-                .thenReturn(randomPojo(OAuth2ClientDO.class).setAutoApproveScopes(null));
+        OAuth2ClientDO oAuth2ClientDO = randomPojo(OAuth2ClientDO.class);
+        oAuth2ClientDO.setAutoApproveScopes(null);
+        when(oauth2ClientService.validOAuthClientFromCache(eq(clientId))).thenReturn(oAuth2ClientDO);
         // mock 数据
-        OAuth2ApproveDO approve = randomPojo(OAuth2ApproveDO.class).setUserId(userId)
-                .setUserType(userType).setClientId(clientId).setScope("read")
-                .setExpiresTime(LocalDateTimeUtil.offset(LocalDateTime.now(), 1L, ChronoUnit.DAYS)).setApproved(true); // 同意
+        OAuth2ApproveDO approve = randomPojo(OAuth2ApproveDO.class);
+        approve.setUserId(userId);
+        approve.setUserType(userType);
+        approve.setClientId(clientId);
+        approve.setScope("read");
+        approve.setExpiresTime(LocalDateTimeUtil.offset(LocalDateTime.now(), 1L, ChronoUnit.DAYS));
+        approve.setApproved(true); // 同意
         oauth2ApproveMapper.insert(approve);
 
         // 调用
@@ -101,12 +108,17 @@ public class OAuth2ApproveServiceImplTest extends BaseDbUnitTest {
         String clientId = randomString();
         List<String> requestedScopes = Lists.newArrayList("read");
         // mock 方法
-        when(oauth2ClientService.validOAuthClientFromCache(eq(clientId)))
-                .thenReturn(randomPojo(OAuth2ClientDO.class).setAutoApproveScopes(null));
+        OAuth2ClientDO oAuth2ClientDO = randomPojo(OAuth2ClientDO.class);
+        oAuth2ClientDO.setAutoApproveScopes(null);
+        when(oauth2ClientService.validOAuthClientFromCache(eq(clientId))).thenReturn(oAuth2ClientDO);
         // mock 数据
-        OAuth2ApproveDO approve = randomPojo(OAuth2ApproveDO.class).setUserId(userId)
-                .setUserType(userType).setClientId(clientId).setScope("read")
-                .setExpiresTime(LocalDateTimeUtil.offset(LocalDateTime.now(), 1L, ChronoUnit.DAYS)).setApproved(false); // 拒绝
+        OAuth2ApproveDO approve = randomPojo(OAuth2ApproveDO.class);
+        approve.setUserId(userId);
+        approve.setUserType(userType);
+        approve.setClientId(clientId);
+        approve.setScope("read");
+        approve.setExpiresTime(LocalDateTimeUtil.offset(LocalDateTime.now(), 1L, ChronoUnit.DAYS));
+        approve.setApproved(false); // 拒绝
         oauth2ApproveMapper.insert(approve);
 
         // 调用
@@ -199,11 +211,16 @@ public class OAuth2ApproveServiceImplTest extends BaseDbUnitTest {
         Integer userType = UserTypeEnum.ADMIN.getValue();
         String clientId = randomString();
         // mock 数据
-        OAuth2ApproveDO approve = randomPojo(OAuth2ApproveDO.class).setUserId(userId)
-                .setUserType(userType).setClientId(clientId).setExpiresTime(LocalDateTimeUtil.offset(LocalDateTime.now(), 1L, ChronoUnit.DAYS));
+        OAuth2ApproveDO approve = randomPojo(OAuth2ApproveDO.class);
+        approve.setUserId(userId);
+        approve.setUserType(userType);
+        approve.setClientId(clientId);
+        approve.setExpiresTime(LocalDateTimeUtil.offset(LocalDateTime.now(), 1L, ChronoUnit.DAYS));
         oauth2ApproveMapper.insert(approve); // 未过期
-        oauth2ApproveMapper.insert(ObjectUtil.clone(approve).setId(null)
-                .setExpiresTime(LocalDateTimeUtil.offset(LocalDateTime.now(), -1L, ChronoUnit.DAYS))); // 已过期
+        OAuth2ApproveDO cloneApprove = ObjectUtil.clone(approve);
+        cloneApprove.setId(null);
+        cloneApprove.setExpiresTime(LocalDateTimeUtil.offset(LocalDateTime.now(), -1L, ChronoUnit.DAYS));
+        oauth2ApproveMapper.insert(cloneApprove); // 已过期
 
         // 调用
         List<OAuth2ApproveDO> result = oauth2ApproveService.getApproveList(userId, userType, clientId);

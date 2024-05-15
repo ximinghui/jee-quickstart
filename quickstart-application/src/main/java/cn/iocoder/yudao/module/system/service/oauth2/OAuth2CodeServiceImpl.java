@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import jakarta.annotation.Resource;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -35,11 +36,15 @@ public class OAuth2CodeServiceImpl implements OAuth2CodeService {
     @Override
     public OAuth2CodeDO createAuthorizationCode(Long userId, Integer userType, String clientId,
                                                 List<String> scopes, String redirectUri, String state) {
-        OAuth2CodeDO codeDO = new OAuth2CodeDO().setCode(generateCode())
-                .setUserId(userId).setUserType(userType)
-                .setClientId(clientId).setScopes(scopes)
-                .setExpiresTime(LocalDateTime.now().plusSeconds(TIMEOUT))
-                .setRedirectUri(redirectUri).setState(state);
+        OAuth2CodeDO codeDO = new OAuth2CodeDO();
+        codeDO.setCode(generateCode());
+        codeDO.setUserId(userId);
+        codeDO.setUserType(userType);
+        codeDO.setClientId(clientId);
+        codeDO.setScopes(scopes);
+        codeDO.setExpiresTime(LocalDateTime.now().plusSeconds(TIMEOUT));
+        codeDO.setRedirectUri(redirectUri);
+        codeDO.setState(state);
         oauth2CodeMapper.insert(codeDO);
         return codeDO;
     }

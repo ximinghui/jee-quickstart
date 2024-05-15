@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,8 +43,8 @@ public class MailTemplateServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testCreateMailTemplate_success() {
         // 准备参数
-        MailTemplateSaveReqVO reqVO = randomPojo(MailTemplateSaveReqVO.class)
-                .setId(null); // 防止 id 被赋值
+        MailTemplateSaveReqVO reqVO = randomPojo(MailTemplateSaveReqVO.class);
+        reqVO.setId(null); // 防止 id 被赋值
 
         // 调用
         Long mailTemplateId = mailTemplateService.createMailTemplate(reqVO);

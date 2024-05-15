@@ -30,6 +30,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import jakarta.annotation.Resource;
+
 import java.io.ByteArrayInputStream;
 import java.util.Collection;
 import java.util.List;
@@ -84,7 +85,8 @@ public class AdminUserServiceImplTest extends BaseDbUnitTest {
             o.setSex(RandomUtil.randomEle(SexEnum.values()).getSex());
             o.setMobile(randomString());
             o.setPostIds(asSet(1L, 2L));
-        }).setId(null); // 避免 id 被赋值
+        });
+        reqVO.setId(null); // 避免 id 被赋值
         // mock 账户额度充足
         TenantDO tenant = randomPojo(TenantDO.class, o -> o.setAccountCount(1));
         doNothing().when(tenantService).handleTenantInfo(argThat(handler -> {
@@ -140,8 +142,14 @@ public class AdminUserServiceImplTest extends BaseDbUnitTest {
         // mock 数据
         AdminUserDO dbUser = randomAdminUserDO(o -> o.setPostIds(asSet(1L, 2L)));
         userMapper.insert(dbUser);
-        userPostMapper.insert(new UserPostDO().setUserId(dbUser.getId()).setPostId(1L));
-        userPostMapper.insert(new UserPostDO().setUserId(dbUser.getId()).setPostId(2L));
+        UserPostDO post1 = new UserPostDO();
+        post1.setUserId(dbUser.getId());
+        post1.setPostId(1L);
+        userPostMapper.insert(post1);
+        UserPostDO post2 = new UserPostDO();
+        post2.setUserId(dbUser.getId());
+        post2.setPostId(2L);
+        userPostMapper.insert(post2);
         // 准备参数
         UserSaveReqVO reqVO = randomPojo(UserSaveReqVO.class, o -> {
             o.setId(dbUser.getId());
@@ -244,7 +252,7 @@ public class AdminUserServiceImplTest extends BaseDbUnitTest {
         ByteArrayInputStream avatarFile = new ByteArrayInputStream(avatarFileBytes);
         // mock 方法
         String avatar = randomString();
-        when(fileApi.createFile(eq( avatarFileBytes))).thenReturn(avatar);
+        when(fileApi.createFile(eq(avatarFileBytes))).thenReturn(avatar);
 
         // 调用
         userService.updateUserAvatar(userId, avatarFile);
@@ -289,7 +297,7 @@ public class AdminUserServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    public void testDeleteUser_success(){
+    public void testDeleteUser_success() {
         // mock 数据
         AdminUserDO dbUser = randomAdminUserDO();
         userMapper.insert(dbUser);
@@ -632,12 +640,21 @@ public class AdminUserServiceImplTest extends BaseDbUnitTest {
         // mock user1 数据
         AdminUserDO user1 = randomAdminUserDO(o -> o.setPostIds(asSet(10L, 30L)));
         userMapper.insert(user1);
-        userPostMapper.insert(new UserPostDO().setUserId(user1.getId()).setPostId(10L));
-        userPostMapper.insert(new UserPostDO().setUserId(user1.getId()).setPostId(30L));
+        UserPostDO post1 = new UserPostDO();
+        post1.setUserId(user1.getId());
+        post1.setPostId(10L);
+        userPostMapper.insert(post1);
+        UserPostDO post2 = new UserPostDO();
+        post2.setUserId(user1.getId());
+        post2.setPostId(30L);
+        userPostMapper.insert(post2);
         // mock user2 数据
         AdminUserDO user2 = randomAdminUserDO(o -> o.setPostIds(singleton(100L)));
         userMapper.insert(user2);
-        userPostMapper.insert(new UserPostDO().setUserId(user2.getId()).setPostId(100L));
+        UserPostDO userPostDO = new UserPostDO();
+        userPostDO.setUserId(user2.getId());
+        userPostDO.setPostId(100L);
+        userPostMapper.insert(userPostDO);
 
         // 调用
         List<AdminUserDO> result = userService.getUserListByPostIds(postIds);
@@ -717,7 +734,8 @@ public class AdminUserServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testValidateUserList_success() {
         // mock 数据
-        AdminUserDO userDO = randomAdminUserDO().setStatus(CommonStatusEnum.ENABLE.getStatus());
+        AdminUserDO userDO = randomAdminUserDO();
+        userDO.setStatus(CommonStatusEnum.ENABLE.getStatus());
         userMapper.insert(userDO);
         // 准备参数
         List<Long> ids = singletonList(userDO.getId());
@@ -738,7 +756,8 @@ public class AdminUserServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testValidateUserList_notEnable() {
         // mock 数据
-        AdminUserDO userDO = randomAdminUserDO().setStatus(CommonStatusEnum.DISABLE.getStatus());
+        AdminUserDO userDO = randomAdminUserDO();
+        userDO.setStatus(CommonStatusEnum.DISABLE.getStatus());
         userMapper.insert(userDO);
         // 准备参数
         List<Long> ids = singletonList(userDO.getId());

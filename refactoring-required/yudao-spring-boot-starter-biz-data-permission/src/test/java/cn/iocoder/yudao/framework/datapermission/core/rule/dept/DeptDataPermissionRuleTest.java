@@ -71,8 +71,10 @@ class DeptDataPermissionRuleTest extends BaseMockitoUnitTest {
             String tableName = "t_user";
             Alias tableAlias = new Alias("u");
             // mock 方法
-            LoginUser loginUser = randomPojo(LoginUser.class, o -> o.setId(1L)
-                    .setUserType(UserTypeEnum.ADMIN.getValue()));
+            LoginUser loginUser = randomPojo(LoginUser.class, o -> {
+                o.setId(1L);
+                o.setUserType(UserTypeEnum.ADMIN.getValue());
+            });
             securityFrameworkUtilsMock.when(SecurityFrameworkUtils::getLoginUser).thenReturn(loginUser);
             // mock 方法（permissionApi 返回 null）
             when(permissionApi.getDeptDataPermission(eq(loginUser.getId()))).thenReturn(null);
@@ -93,11 +95,14 @@ class DeptDataPermissionRuleTest extends BaseMockitoUnitTest {
             String tableName = "t_user";
             Alias tableAlias = new Alias("u");
             // mock 方法（LoginUser）
-            LoginUser loginUser = randomPojo(LoginUser.class, o -> o.setId(1L)
-                    .setUserType(UserTypeEnum.ADMIN.getValue()));
+            LoginUser loginUser = randomPojo(LoginUser.class, o -> {
+                o.setId(1L);
+                o.setUserType(UserTypeEnum.ADMIN.getValue());
+            });
             securityFrameworkUtilsMock.when(SecurityFrameworkUtils::getLoginUser).thenReturn(loginUser);
             // mock 方法（DeptDataPermissionRespDTO）
-            DeptDataPermissionRespDTO deptDataPermission = new DeptDataPermissionRespDTO().setAll(true);
+            DeptDataPermissionRespDTO deptDataPermission = new DeptDataPermissionRespDTO();
+            deptDataPermission.setAll(true);
             when(permissionApi.getDeptDataPermission(same(1L))).thenReturn(deptDataPermission);
 
             // 调用
@@ -116,8 +121,10 @@ class DeptDataPermissionRuleTest extends BaseMockitoUnitTest {
             String tableName = "t_user";
             Alias tableAlias = new Alias("u");
             // mock 方法（LoginUser）
-            LoginUser loginUser = randomPojo(LoginUser.class, o -> o.setId(1L)
-                    .setUserType(UserTypeEnum.ADMIN.getValue()));
+            LoginUser loginUser = randomPojo(LoginUser.class, o -> {
+                o.setId(1L);
+                o.setUserType(UserTypeEnum.ADMIN.getValue());
+            });
             securityFrameworkUtilsMock.when(SecurityFrameworkUtils::getLoginUser).thenReturn(loginUser);
             // mock 方法（DeptDataPermissionRespDTO）
             DeptDataPermissionRespDTO deptDataPermission = new DeptDataPermissionRespDTO();
@@ -139,12 +146,15 @@ class DeptDataPermissionRuleTest extends BaseMockitoUnitTest {
             String tableName = "t_user";
             Alias tableAlias = new Alias("u");
             // mock 方法（LoginUser）
-            LoginUser loginUser = randomPojo(LoginUser.class, o -> o.setId(1L)
-                    .setUserType(UserTypeEnum.ADMIN.getValue()));
+            LoginUser loginUser = randomPojo(LoginUser.class, o -> {
+                o.setId(1L);
+                o.setUserType(UserTypeEnum.ADMIN.getValue());
+            });
             securityFrameworkUtilsMock.when(SecurityFrameworkUtils::getLoginUser).thenReturn(loginUser);
             // mock 方法（DeptDataPermissionRespDTO）
-            DeptDataPermissionRespDTO deptDataPermission = new DeptDataPermissionRespDTO()
-                    .setDeptIds(SetUtils.asSet(10L, 20L)).setSelf(true);
+            DeptDataPermissionRespDTO deptDataPermission = new DeptDataPermissionRespDTO();
+            deptDataPermission.setDeptIds(SetUtils.asSet(10L, 20L));
+            deptDataPermission.setSelf(true);
             when(permissionApi.getDeptDataPermission(same(1L))).thenReturn(deptDataPermission);
 
             // 调用
@@ -163,12 +173,14 @@ class DeptDataPermissionRuleTest extends BaseMockitoUnitTest {
             String tableName = "t_user";
             Alias tableAlias = new Alias("u");
             // mock 方法（LoginUser）
-            LoginUser loginUser = randomPojo(LoginUser.class, o -> o.setId(1L)
-                    .setUserType(UserTypeEnum.ADMIN.getValue()));
+            LoginUser loginUser = randomPojo(LoginUser.class, o -> {
+                o.setId(1L);
+                o.setUserType(UserTypeEnum.ADMIN.getValue());
+            });
             securityFrameworkUtilsMock.when(SecurityFrameworkUtils::getLoginUser).thenReturn(loginUser);
             // mock 方法（DeptDataPermissionRespDTO）
-            DeptDataPermissionRespDTO deptDataPermission = new DeptDataPermissionRespDTO()
-                    .setSelf(true);
+            DeptDataPermissionRespDTO deptDataPermission = new DeptDataPermissionRespDTO();
+            deptDataPermission.setSelf(true);
             when(permissionApi.getDeptDataPermission(same(1L))).thenReturn(deptDataPermission);
             // 添加 user 字段配置
             rule.addUserColumn("t_user", "id");
@@ -189,12 +201,14 @@ class DeptDataPermissionRuleTest extends BaseMockitoUnitTest {
             String tableName = "t_user";
             Alias tableAlias = new Alias("u");
             // mock 方法（LoginUser）
-            LoginUser loginUser = randomPojo(LoginUser.class, o -> o.setId(1L)
-                    .setUserType(UserTypeEnum.ADMIN.getValue()));
+            LoginUser loginUser = randomPojo(LoginUser.class, o -> {
+                o.setId(1L);
+                o.setUserType(UserTypeEnum.ADMIN.getValue());
+            });
             securityFrameworkUtilsMock.when(SecurityFrameworkUtils::getLoginUser).thenReturn(loginUser);
             // mock 方法（DeptDataPermissionRespDTO）
-            DeptDataPermissionRespDTO deptDataPermission = new DeptDataPermissionRespDTO()
-                    .setDeptIds(CollUtil.newLinkedHashSet(10L, 20L));
+            DeptDataPermissionRespDTO deptDataPermission = new DeptDataPermissionRespDTO();
+            deptDataPermission.setDeptIds(CollUtil.newLinkedHashSet(10L, 20L));
             when(permissionApi.getDeptDataPermission(same(1L))).thenReturn(deptDataPermission);
             // 添加 dept 字段配置
             rule.addDeptColumn("t_user", "dept_id");
@@ -215,12 +229,15 @@ class DeptDataPermissionRuleTest extends BaseMockitoUnitTest {
             String tableName = "t_user";
             Alias tableAlias = new Alias("u");
             // mock 方法（LoginUser）
-            LoginUser loginUser = randomPojo(LoginUser.class, o -> o.setId(1L)
-                    .setUserType(UserTypeEnum.ADMIN.getValue()));
+            LoginUser loginUser = randomPojo(LoginUser.class, o -> {
+                o.setId(1L);
+                o.setUserType(UserTypeEnum.ADMIN.getValue());
+            });
             securityFrameworkUtilsMock.when(SecurityFrameworkUtils::getLoginUser).thenReturn(loginUser);
             // mock 方法（DeptDataPermissionRespDTO）
-            DeptDataPermissionRespDTO deptDataPermission = new DeptDataPermissionRespDTO()
-                    .setDeptIds(CollUtil.newLinkedHashSet(10L, 20L)).setSelf(true);
+            DeptDataPermissionRespDTO deptDataPermission = new DeptDataPermissionRespDTO();
+            deptDataPermission.setDeptIds(CollUtil.newLinkedHashSet(10L, 20L));
+            deptDataPermission.setSelf(true);
             when(permissionApi.getDeptDataPermission(same(1L))).thenReturn(deptDataPermission);
             // 添加 user 字段配置
             rule.addUserColumn("t_user", "id");

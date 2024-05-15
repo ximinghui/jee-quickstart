@@ -2,6 +2,8 @@ package cn.iocoder.yudao.module.system.framework.sms.core.property;
 
 import cn.iocoder.yudao.module.system.framework.sms.core.enums.SmsChannelEnum;
 import lombok.Data;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.springframework.validation.annotation.Validated;
 
 import jakarta.validation.constraints.NotEmpty;
@@ -15,6 +17,7 @@ import jakarta.validation.constraints.NotNull;
  */
 @Data
 @Validated
+@Accessors(chain = true)
 public class SmsChannelProperties {
 
     /**

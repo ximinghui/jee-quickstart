@@ -69,8 +69,8 @@ public class JobServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testCreateJob_success() throws SchedulerException {
         // 准备参数 指定 Cron 表达式
-        JobSaveReqVO reqVO = randomPojo(JobSaveReqVO.class, o -> o.setCronExpression("0 0/1 * * * ? *"))
-                .setId(null);
+        JobSaveReqVO reqVO = randomPojo(JobSaveReqVO.class, o -> o.setCronExpression("0 0/1 * * * ? *"));
+        reqVO.setId(null);
         try (MockedStatic<SpringUtil> springUtilMockedStatic = mockStatic(SpringUtil.class)) {
             springUtilMockedStatic.when(() -> SpringUtil.getBean(eq(reqVO.getHandlerName())))
                     .thenReturn(jobLogCleanJob);
@@ -90,7 +90,7 @@ public class JobServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    public void testUpdateJob_jobNotExists(){
+    public void testUpdateJob_jobNotExists() {
         // 准备参数
         JobSaveReqVO reqVO = randomPojo(JobSaveReqVO.class, o -> o.setCronExpression("0 0/1 * * * ? *"));
 
@@ -99,7 +99,7 @@ public class JobServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    public void testUpdateJob_onlyNormalStatus(){
+    public void testUpdateJob_onlyNormalStatus() {
         // mock 数据
         JobDO job = randomPojo(JobDO.class, o -> o.setStatus(JobStatusEnum.INIT.getStatus()));
         jobMapper.insert(job);

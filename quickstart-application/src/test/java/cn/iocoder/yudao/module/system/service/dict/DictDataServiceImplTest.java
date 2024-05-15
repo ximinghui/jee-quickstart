@@ -14,6 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -41,17 +42,25 @@ public class DictDataServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testGetDictDataList() {
         // mock 数据
-        DictDataDO dictDataDO01 = randomDictDataDO().setDictType("yunai").setSort(2)
-                .setStatus(CommonStatusEnum.ENABLE.getStatus());
+        DictDataDO dictDataDO01 = randomDictDataDO();
+        dictDataDO01.setDictType("yunai");
+        dictDataDO01.setSort(2);
+        dictDataDO01.setStatus(CommonStatusEnum.ENABLE.getStatus());
         dictDataMapper.insert(dictDataDO01);
-        DictDataDO dictDataDO02 = randomDictDataDO().setDictType("yunai").setSort(1)
-                .setStatus(CommonStatusEnum.ENABLE.getStatus());
+        DictDataDO dictDataDO02 = randomDictDataDO();
+        dictDataDO02.setDictType("yunai");
+        dictDataDO02.setSort(1);
+        dictDataDO02.setStatus(CommonStatusEnum.ENABLE.getStatus());
         dictDataMapper.insert(dictDataDO02);
-        DictDataDO dictDataDO03 = randomDictDataDO().setDictType("yunai").setSort(3)
-                .setStatus(CommonStatusEnum.DISABLE.getStatus());
+        DictDataDO dictDataDO03 = randomDictDataDO();
+        dictDataDO03.setDictType("yunai");
+        dictDataDO03.setSort(3);
+        dictDataDO03.setStatus(CommonStatusEnum.DISABLE.getStatus());
         dictDataMapper.insert(dictDataDO03);
-        DictDataDO dictDataDO04 = randomDictDataDO().setDictType("yunai2").setSort(3)
-                .setStatus(CommonStatusEnum.DISABLE.getStatus());
+        DictDataDO dictDataDO04 = randomDictDataDO();
+        dictDataDO04.setDictType("yunai2");
+        dictDataDO04.setSort(3);
+        dictDataDO04.setStatus(CommonStatusEnum.DISABLE.getStatus());
         dictDataMapper.insert(dictDataDO04);
         // 准备参数
         Integer status = CommonStatusEnum.ENABLE.getStatus();
@@ -111,9 +120,8 @@ public class DictDataServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testCreateDictData_success() {
         // 准备参数
-        DictDataSaveReqVO reqVO = randomPojo(DictDataSaveReqVO.class,
-                o -> o.setStatus(randomCommonStatus()))
-                .setId(null); // 防止 id 被赋值
+        DictDataSaveReqVO reqVO = randomPojo(DictDataSaveReqVO.class, o -> o.setStatus(randomCommonStatus()));
+        reqVO.setId(null); // 防止 id 被赋值
         // mock 方法
         when(dictTypeService.getDictType(eq(reqVO.getDictType()))).thenReturn(randomDictTypeDO(reqVO.getDictType()));
 
@@ -258,7 +266,8 @@ public class DictDataServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testValidateDictDataList_success() {
         // mock 数据
-        DictDataDO dictDataDO = randomDictDataDO().setStatus(CommonStatusEnum.ENABLE.getStatus());
+        DictDataDO dictDataDO = randomDictDataDO();
+        dictDataDO.setStatus(CommonStatusEnum.ENABLE.getStatus());
         dictDataMapper.insert(dictDataDO);
         // 准备参数
         String dictType = dictDataDO.getDictType();
@@ -281,7 +290,8 @@ public class DictDataServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testValidateDictDataList_notEnable() {
         // mock 数据
-        DictDataDO dictDataDO = randomDictDataDO().setStatus(CommonStatusEnum.DISABLE.getStatus());
+        DictDataDO dictDataDO = randomDictDataDO();
+        dictDataDO.setStatus(CommonStatusEnum.DISABLE.getStatus());
         dictDataMapper.insert(dictDataDO);
         // 准备参数
         String dictType = dictDataDO.getDictType();
@@ -295,9 +305,13 @@ public class DictDataServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testGetDictData_dictType() {
         // mock 数据
-        DictDataDO dictDataDO = randomDictDataDO().setDictType("yunai").setValue("1");
+        DictDataDO dictDataDO = randomDictDataDO();
+        dictDataDO.setDictType("yunai");
+        dictDataDO.setValue("1");
         dictDataMapper.insert(dictDataDO);
-        DictDataDO dictDataDO02 = randomDictDataDO().setDictType("yunai").setValue("2");
+        DictDataDO dictDataDO02 = randomDictDataDO();
+        dictDataDO02.setDictType("yunai");
+        dictDataDO02.setValue("2");
         dictDataMapper.insert(dictDataDO02);
         // 准备参数
         String dictType = "yunai";
@@ -312,9 +326,13 @@ public class DictDataServiceImplTest extends BaseDbUnitTest {
     @Test
     public void testParseDictData() {
         // mock 数据
-        DictDataDO dictDataDO = randomDictDataDO().setDictType("yunai").setLabel("1");
+        DictDataDO dictDataDO = randomDictDataDO();
+        dictDataDO.setDictType("yunai");
+        dictDataDO.setLabel("1");
         dictDataMapper.insert(dictDataDO);
-        DictDataDO dictDataDO02 = randomDictDataDO().setDictType("yunai").setLabel("2");
+        DictDataDO dictDataDO02 = randomDictDataDO();
+        dictDataDO02.setDictType("yunai");
+        dictDataDO02.setLabel("2");
         dictDataMapper.insert(dictDataDO02);
         // 准备参数
         String dictType = "yunai";

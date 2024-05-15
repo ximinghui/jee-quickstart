@@ -63,10 +63,10 @@ public class TencentSmsClientTest extends BaseMockitoUnitTest {
     @Test
     public void testRefresh() {
         // 准备参数
-        SmsChannelProperties p = new SmsChannelProperties()
-                .setApiKey(randomString() + " " + randomString()) // 随机一个 apiKey，避免构建报错
-                .setApiSecret(randomString()) // 随机一个 apiSecret，避免构建报错
-                .setSignature("芋道源码");
+        SmsChannelProperties p = new SmsChannelProperties();
+        p.setApiKey(randomString() + " " + randomString()); // 随机一个 apiKey，避免构建报错
+        p.setApiSecret(randomString()); // 随机一个 apiSecret，避免构建报错
+        p.setSignature("芋道源码");
         // 调用
         smsClient.refresh(p);
         // 断言

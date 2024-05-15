@@ -41,7 +41,7 @@ import static cn.iocoder.yudao.framework.common.util.json.JsonUtils.toJsonString
 
 /**
  * API 访问日志 Filter
- *
+ * <p>
  * 目的：记录 API 访问日志到数据库中
  *
  * @author 芋道源码
@@ -110,22 +110,27 @@ public class ApiAccessLogFilter extends ApiRequestFilter {
         }
 
         // 处理用户信息
-        accessLog.setUserId(WebFrameworkUtils.getLoginUserId(request))
-                .setUserType(WebFrameworkUtils.getLoginUserType(request));
+        accessLog.setUserId(WebFrameworkUtils.getLoginUserId(request));
+        accessLog.setUserType(WebFrameworkUtils.getLoginUserType(request));
         // 设置访问结果
         CommonResult<?> result = WebFrameworkUtils.getCommonResult(request);
         if (result != null) {
-            accessLog.setResultCode(result.getCode()).setResultMsg(result.getMsg());
+            accessLog.setResultCode(result.getCode());
+            accessLog.setResultMsg(result.getMsg());
         } else if (ex != null) {
-            accessLog.setResultCode(GlobalErrorCodeConstants.INTERNAL_SERVER_ERROR.getCode())
-                    .setResultMsg(ExceptionUtil.getRootCauseMessage(ex));
+            accessLog.setResultCode(GlobalErrorCodeConstants.INTERNAL_SERVER_ERROR.getCode());
+            accessLog.setResultMsg(ExceptionUtil.getRootCauseMessage(ex));
         } else {
-            accessLog.setResultCode(GlobalErrorCodeConstants.SUCCESS.getCode()).setResultMsg("");
+            accessLog.setResultCode(GlobalErrorCodeConstants.SUCCESS.getCode());
+            accessLog.setResultMsg("");
         }
         // 设置请求字段
-        accessLog.setTraceId(TracerUtils.getTraceId()).setApplicationName(applicationName)
-                .setRequestUrl(request.getRequestURI()).setRequestMethod(request.getMethod())
-                .setUserAgent(ServletUtils.getUserAgent(request)).setUserIp(ServletUtils.getClientIP(request));
+        accessLog.setTraceId(TracerUtils.getTraceId());
+        accessLog.setApplicationName(applicationName);
+        accessLog.setRequestUrl(request.getRequestURI());
+        accessLog.setRequestMethod(request.getMethod());
+        accessLog.setUserAgent(ServletUtils.getUserAgent(request));
+        accessLog.setUserIp(ServletUtils.getClientIP(request));
         String[] sanitizeKeys = accessLogAnnotation != null ? accessLogAnnotation.sanitizeKeys() : null;
         Boolean requestEnable = accessLogAnnotation != null ? accessLogAnnotation.requestEnable() : Boolean.TRUE;
         if (!BooleanUtil.isFalse(requestEnable)) { // 默认记录，所以判断 !false
@@ -139,8 +144,9 @@ public class ApiAccessLogFilter extends ApiRequestFilter {
             accessLog.setResponseBody(sanitizeJson(result, sanitizeKeys));
         }
         // 持续时间
-        accessLog.setBeginTime(beginTime).setEndTime(LocalDateTime.now())
-                .setDuration((int) LocalDateTimeUtil.between(accessLog.getBeginTime(), accessLog.getEndTime(), ChronoUnit.MILLIS));
+        accessLog.setBeginTime(beginTime);
+        accessLog.setEndTime(LocalDateTime.now());
+        accessLog.setDuration((int) LocalDateTimeUtil.between(accessLog.getBeginTime(), accessLog.getEndTime(), ChronoUnit.MILLIS));
 
         // 操作模块
         if (handlerMethod != null) {
@@ -152,7 +158,9 @@ public class ApiAccessLogFilter extends ApiRequestFilter {
                     operationAnnotation != null ? operationAnnotation.summary() : null;
             OperateTypeEnum operateType = accessLogAnnotation != null && accessLogAnnotation.operateType().length > 0 ?
                     accessLogAnnotation.operateType()[0] : parseOperateLogType(request);
-            accessLog.setOperateModule(operateModule).setOperateName(operateName).setOperateType(operateType.getType());
+            accessLog.setOperateModule(operateModule);
+            accessLog.setOperateName(operateName);
+            accessLog.setOperateType(operateType.getType());
         }
         return true;
     }
@@ -239,7 +247,7 @@ public class ApiAccessLogFilter extends ApiRequestFilter {
         while (iterator.hasNext()) {
             Map.Entry<String, JsonNode> entry = iterator.next();
             if (ArrayUtil.contains(sanitizeKeys, entry.getKey())
-                || ArrayUtil.contains(SANITIZE_KEYS, entry.getKey())) {
+                    || ArrayUtil.contains(SANITIZE_KEYS, entry.getKey())) {
                 iterator.remove();
                 continue;
             }

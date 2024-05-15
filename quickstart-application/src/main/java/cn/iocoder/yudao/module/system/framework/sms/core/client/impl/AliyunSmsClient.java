@@ -79,17 +79,29 @@ public class AliyunSmsClient extends AbstractSmsClient {
         request.setOutId(String.valueOf(sendLogId));
         // 执行请求
         SendSmsResponse response = client.getAcsResponse(request);
-        return new SmsSendRespDTO().setSuccess(Objects.equals(response.getCode(), API_CODE_SUCCESS)).setSerialNo(response.getBizId())
-                .setApiRequestId(response.getRequestId()).setApiCode(response.getCode()).setApiMsg(response.getMessage());
+        SmsSendRespDTO smsSendRespDTO = new SmsSendRespDTO();
+        smsSendRespDTO.setSuccess(Objects.equals(response.getCode(), API_CODE_SUCCESS));
+        smsSendRespDTO.setSerialNo(response.getBizId());
+        smsSendRespDTO.setApiRequestId(response.getRequestId());
+        smsSendRespDTO.setApiCode(response.getCode());
+        smsSendRespDTO.setApiMsg(response.getMessage());
+        return smsSendRespDTO;
     }
 
     @Override
     public List<SmsReceiveRespDTO> parseSmsReceiveStatus(String text) {
         List<SmsReceiveStatus> statuses = JsonUtils.parseArray(text, SmsReceiveStatus.class);
-        return convertList(statuses, status -> new SmsReceiveRespDTO().setSuccess(status.getSuccess())
-                .setErrorCode(status.getErrCode()).setErrorMsg(status.getErrMsg())
-                .setMobile(status.getPhoneNumber()).setReceiveTime(status.getReportTime())
-                .setSerialNo(status.getBizId()).setLogId(Long.valueOf(status.getOutId())));
+        return convertList(statuses, status -> {
+            SmsReceiveRespDTO smsReceiveRespDTO = new SmsReceiveRespDTO();
+            smsReceiveRespDTO.setSuccess(status.getSuccess());
+            smsReceiveRespDTO.setErrorCode(status.getErrCode());
+            smsReceiveRespDTO.setErrorMsg(status.getErrMsg());
+            smsReceiveRespDTO.setMobile(status.getPhoneNumber());
+            smsReceiveRespDTO.setReceiveTime(status.getReportTime());
+            smsReceiveRespDTO.setSerialNo(status.getBizId());
+            smsReceiveRespDTO.setLogId(Long.valueOf(status.getOutId()));
+            return smsReceiveRespDTO;
+        });
     }
 
     @Override
@@ -102,23 +114,28 @@ public class AliyunSmsClient extends AbstractSmsClient {
         if (response.getTemplateStatus() == null) {
             return null;
         }
-        return new SmsTemplateRespDTO().setId(response.getTemplateCode()).setContent(response.getTemplateContent())
-                .setAuditStatus(convertSmsTemplateAuditStatus(response.getTemplateStatus())).setAuditReason(response.getReason());
+
+        SmsTemplateRespDTO smsTemplateRespDTO = new SmsTemplateRespDTO();
+        smsTemplateRespDTO.setId(response.getTemplateCode());
+        smsTemplateRespDTO.setContent(response.getTemplateContent());
+        smsTemplateRespDTO.setAuditStatus(convertSmsTemplateAuditStatus(response.getTemplateStatus()));
+        smsTemplateRespDTO.setAuditReason(response.getReason());
+        return smsTemplateRespDTO;
     }
 
     @VisibleForTesting
     Integer convertSmsTemplateAuditStatus(Integer templateStatus) {
-        switch (templateStatus) {
-            case 0: return SmsTemplateAuditStatusEnum.CHECKING.getStatus();
-            case 1: return SmsTemplateAuditStatusEnum.SUCCESS.getStatus();
-            case 2: return SmsTemplateAuditStatusEnum.FAIL.getStatus();
-            default: throw new IllegalArgumentException(String.format("未知审核状态(%d)", templateStatus));
-        }
+        return switch (templateStatus) {
+            case 0 -> SmsTemplateAuditStatusEnum.CHECKING.getStatus();
+            case 1 -> SmsTemplateAuditStatusEnum.SUCCESS.getStatus();
+            case 2 -> SmsTemplateAuditStatusEnum.FAIL.getStatus();
+            default -> throw new IllegalArgumentException(String.format("未知审核状态(%d)", templateStatus));
+        };
     }
 
     /**
      * 短信接收状态
-     *
+     * <p>
      * 参见 <a href="https://help.aliyun.com/document_detail/101867.html">文档</a>
      *
      * @author 芋道源码
@@ -164,14 +181,14 @@ public class AliyunSmsClient extends AbstractSmsClient {
         private String bizId;
         /**
          * 用户序列号
-         *
+         * <p>
          * 这里我们传递的是 SysSmsLogDO 的日志编号
          */
         @JsonProperty("out_id")
         private String outId;
         /**
          * 短信长度，例如说 1、2、3
-         *
+         * <p>
          * 140 字节算一条短信，短信长度超过 140 字节时会拆分成多条短信发送
          */
         @JsonProperty("sms_size")

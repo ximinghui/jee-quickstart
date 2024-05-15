@@ -20,6 +20,7 @@ import org.springframework.validation.annotation.Validated;
 
 import jakarta.annotation.Resource;
 import jakarta.validation.constraints.NotNull;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -124,9 +125,9 @@ public class SocialUserServiceImpl implements SocialUserService {
      * 如果授权失败，则会抛出 {@link ServiceException} 异常
      *
      * @param socialType 社交平台的类型 {@link SocialTypeEnum}
-     * @param userType 用户类型
-     * @param code     授权码
-     * @param state    state
+     * @param userType   用户类型
+     * @param code       授权码
+     * @param state      state
      * @return 授权用户
      */
     @NotNull
@@ -147,9 +148,15 @@ public class SocialUserServiceImpl implements SocialUserService {
         if (socialUser == null) {
             socialUser = new SocialUserDO();
         }
-        socialUser.setType(socialType).setCode(code).setState(state) // 需要保存 code + state 字段，保证后续可查询
-                .setOpenid(authUser.getUuid()).setToken(authUser.getToken().getAccessToken()).setRawTokenInfo((toJsonString(authUser.getToken())))
-                .setNickname(authUser.getNickname()).setAvatar(authUser.getAvatar()).setRawUserInfo(toJsonString(authUser.getRawUserInfo()));
+        socialUser.setType(socialType);
+        socialUser.setCode(code);
+        socialUser.setState(state); // 需要保存 code + state 字段，保证后续可查询
+        socialUser.setOpenid(authUser.getUuid());
+        socialUser.setToken(authUser.getToken().getAccessToken());
+        socialUser.setRawTokenInfo((toJsonString(authUser.getToken())));
+        socialUser.setNickname(authUser.getNickname());
+        socialUser.setAvatar(authUser.getAvatar());
+        socialUser.setRawUserInfo(toJsonString(authUser.getRawUserInfo()));
         if (socialUser.getId() == null) {
             socialUserMapper.insert(socialUser);
         } else {

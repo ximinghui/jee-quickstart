@@ -2,6 +2,7 @@ package cn.iocoder.yudao.module.system.api.logger.dto;
 
 import cn.iocoder.yudao.framework.common.pojo.PageParam;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 操作日志分页 Request DTO
@@ -9,6 +10,7 @@ import lombok.Data;
  * @author HUIHUI
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class OperateLogPageReqDTO extends PageParam {
 
     /**

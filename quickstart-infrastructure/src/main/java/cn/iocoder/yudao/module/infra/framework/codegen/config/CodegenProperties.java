@@ -2,16 +2,19 @@ package cn.iocoder.yudao.module.infra.framework.codegen.config;
 
 import cn.iocoder.yudao.module.infra.enums.codegen.CodegenFrontTypeEnum;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+
 import java.util.Collection;
 
 @ConfigurationProperties(prefix = "yudao.codegen")
 @Validated
 @Data
+@Accessors(chain = true)
 public class CodegenProperties {
 
     /**
@@ -28,7 +31,7 @@ public class CodegenProperties {
 
     /**
      * 代码生成的前端类型（默认）
-     *
+     * <p>
      * 枚举 {@link CodegenFrontTypeEnum#getType()}
      */
     @NotNull(message = "代码生成的前端类型不能为空")
