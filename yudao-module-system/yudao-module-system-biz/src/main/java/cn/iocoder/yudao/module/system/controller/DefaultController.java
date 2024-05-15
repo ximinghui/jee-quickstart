@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.server.controller;
+package cn.iocoder.yudao.module.system.controller;
 
 import cn.iocoder.yudao.framework.common.pojo.CommonResult;
 import org.springframework.web.bind.annotation.RequestMapping;
