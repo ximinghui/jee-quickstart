@@ -78,12 +78,6 @@
             <artifactId>yudao-spring-boot-starter-redis</artifactId>
         </dependency>
 
-        <!-- Job 定时任务相关 -->
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-job</artifactId>
-        </dependency>
-
         <!-- 消息队列相关 -->
         <dependency>
             <groupId>org.ximinghui</groupId>

@@ -20,6 +20,23 @@
     </description>
 
     <dependencies>
+        <dependency>
+            <groupId>org.ximinghui</groupId>
+            <artifactId>quickstart-common</artifactId>
+        </dependency>
+
+        <!-- Job 定时任务相关 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
+
+        <!-- 工具类相关 -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+        </dependency>
+
         <!-- 业务组件 -->
         <dependency>
             <groupId>org.ximinghui</groupId>
@@ -53,12 +70,6 @@
         </dependency>
 
         <!-- Config 配置中心相关 -->
-
-        <!-- Job 定时任务相关 -->
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-job</artifactId>
-        </dependency>
 
         <!-- 消息队列相关 -->
         <dependency>
