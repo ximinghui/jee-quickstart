@@ -27,7 +27,7 @@
         <!-- ################### Server模块的依赖 ################### -->
         <dependency>
             <groupId>cn.iocoder.boot</groupId>
-            <artifactId>yudao-module-infra-biz</artifactId>
+            <artifactId>quickstart-infrastructure</artifactId>
             <version>${revision}</version>
         </dependency>
         <!-- spring boot 配置所需依赖 -->

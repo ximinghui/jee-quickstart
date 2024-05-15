@@ -10,7 +10,7 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>yudao-module-infra-biz</artifactId>
+    <artifactId>quickstart-infrastructure</artifactId>
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
