@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>cn.iocoder.boot</groupId>
+        <groupId>org.ximinghui</groupId>
         <artifactId>refactoring-required</artifactId>
         <version>${revision}</version>
     </parent>
@@ -20,7 +20,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
+            <groupId>org.ximinghui</groupId>
             <artifactId>quickstart-common</artifactId>
         </dependency>
 
@@ -32,7 +32,7 @@
 
         <!-- Web 相关 -->
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
+            <groupId>org.ximinghui</groupId>
             <artifactId>yudao-spring-boot-starter-web</artifactId>
         </dependency>
         <!-- spring boot 配置所需依赖 -->
@@ -62,7 +62,7 @@
 
         <!-- 业务组件 -->
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
+            <groupId>org.ximinghui</groupId>
             <artifactId>yudao-module-system-api</artifactId> <!-- 需要使用它，进行 Token 的校验 -->
             <version>${revision}</version>
         </dependency>

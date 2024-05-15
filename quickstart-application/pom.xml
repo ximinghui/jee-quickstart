@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>cn.iocoder.boot</groupId>
-        <artifactId>yudao</artifactId>
+        <groupId>org.ximinghui</groupId>
+        <artifactId>jee-quickstart</artifactId>
         <version>${revision}</version>
     </parent>
 
@@ -26,7 +26,7 @@
 
         <!-- ################### Server模块的依赖 ################### -->
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
+            <groupId>org.ximinghui</groupId>
             <artifactId>quickstart-infrastructure</artifactId>
             <version>${revision}</version>
         </dependency>
@@ -39,40 +39,40 @@
 
         <!-- 服务保障相关 -->
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
+            <groupId>org.ximinghui</groupId>
             <artifactId>yudao-spring-boot-starter-protection</artifactId>
         </dependency>
 
 
         <!-- ###################################### -->
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
+            <groupId>org.ximinghui</groupId>
             <artifactId>yudao-module-system-api</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
+            <groupId>org.ximinghui</groupId>
             <artifactId>yudao-module-infra-api</artifactId>
             <version>${revision}</version>
         </dependency>
 
         <!-- 业务组件 -->
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
+            <groupId>org.ximinghui</groupId>
             <artifactId>yudao-spring-boot-starter-biz-data-permission</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
+            <groupId>org.ximinghui</groupId>
             <artifactId>yudao-spring-boot-starter-biz-tenant</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
+            <groupId>org.ximinghui</groupId>
             <artifactId>yudao-spring-boot-starter-biz-ip</artifactId>
         </dependency>
 
         <!-- Web 相关 -->
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
+            <groupId>org.ximinghui</groupId>
             <artifactId>yudao-spring-boot-starter-security</artifactId>
         </dependency>
 
@@ -83,37 +83,37 @@
 
         <!-- DB 相关 -->
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
+            <groupId>org.ximinghui</groupId>
             <artifactId>yudao-spring-boot-starter-mybatis</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
+            <groupId>org.ximinghui</groupId>
             <artifactId>yudao-spring-boot-starter-redis</artifactId>
         </dependency>
 
         <!-- Job 定时任务相关 -->
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
+            <groupId>org.ximinghui</groupId>
             <artifactId>yudao-spring-boot-starter-job</artifactId>
         </dependency>
 
         <!-- 消息队列相关 -->
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
+            <groupId>org.ximinghui</groupId>
             <artifactId>yudao-spring-boot-starter-mq</artifactId>
         </dependency>
 
         <!-- Test 测试相关 -->
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
+            <groupId>org.ximinghui</groupId>
             <artifactId>yudao-spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
         <!-- 工具类相关 -->
         <dependency>
-            <groupId>cn.iocoder.boot</groupId>
+            <groupId>org.ximinghui</groupId>
             <artifactId>yudao-spring-boot-starter-excel</artifactId>
         </dependency>
 
