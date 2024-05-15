@@ -13,6 +13,7 @@
         <module>yudao-framework</module>
         <!-- 各种 module 拓展 -->
         <module>quickstart-application</module>
+        <module>quickstart-common</module>
         <module>quickstart-infrastructure</module>
         <module>yudao-module-system-api</module>
         <module>yudao-module-infra-api</module>
@@ -413,7 +414,7 @@
             <!-- 工具类相关 -->
             <dependency>
                 <groupId>cn.iocoder.boot</groupId>
-                <artifactId>yudao-common</artifactId>
+                <artifactId>quickstart-common</artifactId>
                 <version>${revision}</version>
             </dependency>
 

@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.iocoder.boot</groupId>
-            <artifactId>yudao-common</artifactId>
+            <artifactId>quickstart-common</artifactId>
         </dependency>
 
         <!-- 参数校验 -->
