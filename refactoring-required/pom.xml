@@ -14,7 +14,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>yudao-module-infra-api</module>
         <module>yudao-module-system-api</module>
 
         <module>yudao-spring-boot-starter-mybatis</module>
