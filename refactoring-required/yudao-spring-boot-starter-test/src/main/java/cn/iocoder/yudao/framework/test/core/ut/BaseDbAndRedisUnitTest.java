@@ -1,6 +1,5 @@
 package cn.iocoder.yudao.framework.test.core.ut;
 
-import cn.iocoder.yudao.framework.datasource.config.YudaoDataSourceAutoConfiguration;
 import cn.iocoder.yudao.framework.mybatis.config.YudaoMybatisAutoConfiguration;
 import cn.iocoder.yudao.framework.redis.config.YudaoRedisAutoConfiguration;
 import cn.iocoder.yudao.framework.test.config.RedisTestConfiguration;
@@ -30,7 +29,6 @@ public class BaseDbAndRedisUnitTest {
 
     @Import({
             // DB 配置类
-            YudaoDataSourceAutoConfiguration.class, // 自己的 DB 配置类
             DataSourceAutoConfiguration.class, // Spring DB 自动配置类
             DataSourceTransactionManagerAutoConfiguration.class, // Spring 事务自动配置类
             DruidDataSourceAutoConfigure.class, // Druid 自动配置类
