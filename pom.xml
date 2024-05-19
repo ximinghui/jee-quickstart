@@ -253,13 +253,6 @@
                 <version>${rocketmq-spring.version}</version>
             </dependency>
 
-            <!-- 监控相关 -->
-            <dependency>
-                <groupId>org.ximinghui</groupId>
-                <artifactId>yudao-spring-boot-starter-monitor</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.apache.skywalking</groupId>
                 <artifactId>apm-toolkit-trace</artifactId>
