@@ -1,7 +1,6 @@
 package cn.iocoder.yudao.framework.ratelimiter.core.annotation;
 
 import cn.iocoder.yudao.framework.common.exception.enums.GlobalErrorCodeConstants;
-import cn.iocoder.yudao.framework.idempotent.core.keyresolver.impl.ExpressionIdempotentKeyResolver;
 import cn.iocoder.yudao.framework.ratelimiter.core.keyresolver.RateLimiterKeyResolver;
 import cn.iocoder.yudao.framework.ratelimiter.core.keyresolver.impl.ClientIpRateLimiterKeyResolver;
 import cn.iocoder.yudao.framework.ratelimiter.core.keyresolver.impl.DefaultRateLimiterKeyResolver;
@@ -51,7 +50,6 @@ public @interface RateLimiter {
      * @see UserRateLimiterKeyResolver 用户 ID 级别
      * @see ClientIpRateLimiterKeyResolver 用户 IP 级别
      * @see ServerNodeRateLimiterKeyResolver 服务器 Node 级别
-     * @see ExpressionIdempotentKeyResolver 自定义表达式，通过 {@link #keyArg()} 计算
      */
     Class<? extends RateLimiterKeyResolver> keyResolver() default DefaultRateLimiterKeyResolver.class;
     /**

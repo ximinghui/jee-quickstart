@@ -1,2 +1,1 @@
-cn.iocoder.yudao.framework.idempotent.config.YudaoIdempotentConfiguration
 cn.iocoder.yudao.framework.ratelimiter.config.YudaoRateLimiterConfiguration
