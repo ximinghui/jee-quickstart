@@ -131,11 +131,6 @@
             </dependency>
             <dependency>
                 <groupId>org.ximinghui</groupId>
-                <artifactId>yudao-spring-boot-starter-biz-data-permission</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ximinghui</groupId>
                 <artifactId>yudao-spring-boot-starter-biz-ip</artifactId>
                 <version>${revision}</version>
             </dependency>
