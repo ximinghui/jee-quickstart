@@ -23,7 +23,6 @@
         <module>yudao-spring-boot-starter-websocket</module>
 
         <module>yudao-spring-boot-starter-monitor</module>
-        <module>yudao-spring-boot-starter-protection</module>
         <module>yudao-spring-boot-starter-mq</module>
 
         <module>yudao-spring-boot-starter-excel</module>

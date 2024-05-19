@@ -255,13 +255,6 @@
                 <version>${rocketmq-spring.version}</version>
             </dependency>
 
-            <!-- 服务保障相关 -->
-            <dependency>
-                <groupId>org.ximinghui</groupId>
-                <artifactId>yudao-spring-boot-starter-protection</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>lock4j-redisson-spring-boot-starter</artifactId>

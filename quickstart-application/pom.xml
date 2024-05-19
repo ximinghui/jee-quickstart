@@ -36,12 +36,6 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- 服务保障相关 -->
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-protection</artifactId>
-        </dependency>
-
         <!-- 业务组件 -->
         <dependency>
             <groupId>org.ximinghui</groupId>
