@@ -25,6 +25,11 @@
             <artifactId>quickstart-common</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.ximinghui</groupId>
+            <artifactId>refactoring-required</artifactId>
+        </dependency>
+
         <!-- Job 定时任务相关 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -37,60 +42,13 @@
             <artifactId>jakarta.validation-api</artifactId>
         </dependency>
 
-        <!-- 业务组件 -->
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-biz-tenant</artifactId>
-        </dependency>
-
-        <!-- Web 相关 -->
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-security</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-websocket</artifactId>
-        </dependency>
-
         <!-- DB 相关 -->
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-mybatis</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId> <!-- 代码生成器，使用它解析表结构 -->
         </dependency>
 
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-redis</artifactId>
-        </dependency>
-
-        <!-- Config 配置中心相关 -->
-
-        <!-- 消息队列相关 -->
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-mq</artifactId>
-        </dependency>
-
-        <!-- Test 测试相关 -->
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
         <!-- 工具类相关 -->
-
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-excel</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-engine-core</artifactId> <!-- 实现代码生成 -->

@@ -126,12 +126,7 @@
             </dependency>
             <dependency>
                 <groupId>org.ximinghui</groupId>
-                <artifactId>yudao-spring-boot-starter-biz-tenant</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.ximinghui</groupId>
-                <artifactId>yudao-spring-boot-starter-biz-ip</artifactId>
+                <artifactId>refactoring-required</artifactId>
                 <version>${revision}</version>
             </dependency>
 
@@ -144,24 +139,6 @@
             </dependency>
 
             <!-- Web 相关 -->
-            <dependency>
-                <groupId>org.ximinghui</groupId>
-                <artifactId>yudao-spring-boot-starter-web</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.ximinghui</groupId>
-                <artifactId>yudao-spring-boot-starter-security</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.ximinghui</groupId>
-                <artifactId>yudao-spring-boot-starter-websocket</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
@@ -179,12 +156,6 @@
             </dependency>
 
             <!-- DB 相关 -->
-            <dependency>
-                <groupId>org.ximinghui</groupId>
-                <artifactId>yudao-spring-boot-starter-mybatis</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-3-starter</artifactId>
@@ -210,13 +181,6 @@
                 <artifactId>mybatis-plus-join-boot-starter</artifactId> <!-- MyBatis 联表查询 -->
                 <version>${mybatis-plus-join.version}</version>
             </dependency>
-
-            <dependency>
-                <groupId>org.ximinghui</groupId>
-                <artifactId>yudao-spring-boot-starter-redis</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
@@ -236,12 +200,6 @@
             </dependency>
 
             <!-- 消息队列相关 -->
-            <dependency>
-                <groupId>org.ximinghui</groupId>
-                <artifactId>yudao-spring-boot-starter-mq</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-spring-boot-starter</artifactId>
@@ -298,13 +256,6 @@
 
             <!-- Test 测试相关 -->
             <dependency>
-                <groupId>org.ximinghui</groupId>
-                <artifactId>yudao-spring-boot-starter-test</artifactId>
-                <version>${revision}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-inline</artifactId>
                 <version>${mockito-inline.version}</version> <!-- 支持 Mockito 的 final 类与 static 方法的 mock -->
@@ -357,13 +308,6 @@
                 <artifactId>quickstart-common</artifactId>
                 <version>${revision}</version>
             </dependency>
-
-            <dependency>
-                <groupId>org.ximinghui</groupId>
-                <artifactId>yudao-spring-boot-starter-excel</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>

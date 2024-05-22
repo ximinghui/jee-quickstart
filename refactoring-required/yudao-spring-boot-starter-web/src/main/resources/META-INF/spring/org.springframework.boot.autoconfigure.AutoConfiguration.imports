@@ -1,5 +1,0 @@
-cn.iocoder.yudao.framework.config.YudaoApiLogAutoConfiguration
-cn.iocoder.yudao.framework.config.YudaoJacksonAutoConfiguration
-cn.iocoder.yudao.framework.config.YudaoSwaggerAutoConfiguration
-cn.iocoder.yudao.framework.config.YudaoWebAutoConfiguration
-cn.iocoder.yudao.framework.config.YudaoXssAutoConfiguration

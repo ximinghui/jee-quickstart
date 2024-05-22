@@ -36,62 +36,13 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- 业务组件 -->
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-module-system-api</artifactId>
-            <version>${revision}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-biz-tenant</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-biz-ip</artifactId>
-        </dependency>
-
         <!-- Web 相关 -->
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-security</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- DB 相关 -->
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-mybatis</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-redis</artifactId>
-        </dependency>
-
-        <!-- 消息队列相关 -->
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-mq</artifactId>
-        </dependency>
-
-        <!-- Test 测试相关 -->
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
         <!-- 工具类相关 -->
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>yudao-spring-boot-starter-excel</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
