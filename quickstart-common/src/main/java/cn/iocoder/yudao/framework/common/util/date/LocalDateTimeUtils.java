@@ -28,7 +28,7 @@ public class LocalDateTimeUtils {
 
     /**
      * 解析时间
-     *
+     * <p>
      * 相比 {@link LocalDateTimeUtil#parse(CharSequence)} 方法来说，会尽量去解析，直到成功
      *
      * @param time 时间
@@ -79,8 +79,8 @@ public class LocalDateTimeUtils {
      * 判指定断时间，是否在该时间范围内
      *
      * @param startTime 开始时间
-     * @param endTime 结束时间
-     * @param time 指定时间
+     * @param endTime   结束时间
+     * @param time      指定时间
      * @return 是否
      */
     public static boolean isBetween(LocalDateTime startTime, LocalDateTime endTime, String time) {

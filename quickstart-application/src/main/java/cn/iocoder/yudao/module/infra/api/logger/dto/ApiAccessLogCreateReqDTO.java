@@ -3,6 +3,7 @@ package cn.iocoder.yudao.module.infra.api.logger.dto;
 import lombok.Data;
 
 import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDateTime;
 
 /**
@@ -70,7 +71,7 @@ public class ApiAccessLogCreateReqDTO {
     private String operateName;
     /**
      * 操作分类
-     *
+     * <p>
      * 枚举，参见 OperateTypeEnum 类
      */
     private Integer operateType;

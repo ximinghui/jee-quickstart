@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 区域节点，包括国家、省份、城市、地区等信息
- *
+ * <p>
  * 数据可见 resources/area.csv 文件
  *
  * @author 芋道源码
@@ -38,7 +38,7 @@ public class Area {
     private String name;
     /**
      * 类型
-     *
+     * <p>
      * 枚举 {@link AreaTypeEnum}
      */
     private Integer type;

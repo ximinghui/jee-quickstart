@@ -33,7 +33,7 @@ public interface JobService {
     /**
      * 更新定时任务的状态
      *
-     * @param id 任务编号
+     * @param id     任务编号
      * @param status 状态
      */
     void updateJobStatus(Long id, Integer status) throws SchedulerException;
@@ -47,7 +47,7 @@ public interface JobService {
 
     /**
      * 同步定时任务
-     *
+     * <p>
      * 目的：自己存储的 Job 信息，强制同步到 Quartz 中
      */
     void syncJob() throws SchedulerException;

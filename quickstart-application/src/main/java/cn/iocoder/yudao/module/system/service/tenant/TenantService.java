@@ -9,6 +9,7 @@ import cn.iocoder.yudao.module.system.service.tenant.handler.TenantInfoHandler;
 import cn.iocoder.yudao.module.system.service.tenant.handler.TenantMenuHandler;
 
 import jakarta.validation.Valid;
+
 import java.util.List;
 import java.util.Set;
 
@@ -38,7 +39,7 @@ public interface TenantService {
      * 更新租户的角色菜单
      *
      * @param tenantId 租户编号
-     * @param menuIds 菜单编号数组
+     * @param menuIds  菜单编号数组
      */
     void updateTenantRoleMenu(Long tenantId, Set<Long> menuIds);
 

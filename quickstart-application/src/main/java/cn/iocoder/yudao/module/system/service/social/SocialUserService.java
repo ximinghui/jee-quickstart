@@ -9,6 +9,7 @@ import cn.iocoder.yudao.module.system.dal.dataobject.social.SocialUserDO;
 import cn.iocoder.yudao.module.system.enums.social.SocialTypeEnum;
 
 import jakarta.validation.Valid;
+
 import java.util.List;
 
 /**
@@ -38,18 +39,18 @@ public interface SocialUserService {
     /**
      * 取消绑定社交用户
      *
-     * @param userId 用户编号
-     * @param userType 全局用户类型
+     * @param userId     用户编号
+     * @param userType   全局用户类型
      * @param socialType 社交平台的类型 {@link SocialTypeEnum}
-     * @param openid 社交平台的 openid
+     * @param openid     社交平台的 openid
      */
     void unbindSocialUser(Long userId, Integer userType, Integer socialType, String openid);
 
     /**
      * 获得社交用户，基于 userId
      *
-     * @param userType 用户类型
-     * @param userId 用户编号
+     * @param userType   用户类型
+     * @param userId     用户编号
      * @param socialType 社交平台的类型
      * @return 社交用户
      */
@@ -57,13 +58,13 @@ public interface SocialUserService {
 
     /**
      * 获得社交用户
-     *
+     * <p>
      * 在认证信息不正确的情况下，也会抛出 {@link ServiceException} 业务异常
      *
-     * @param userType 用户类型
+     * @param userType   用户类型
      * @param socialType 社交平台的类型
-     * @param code 授权码
-     * @param state state
+     * @param code       授权码
+     * @param state      state
      * @return 社交用户
      */
     SocialUserRespDTO getSocialUserByCode(Integer userType, Integer socialType, String code, String state);

@@ -84,12 +84,12 @@ public class Demo03StudentController {
     @PreAuthorize("@ss.hasPermission('infra:demo03-student:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportDemo03StudentExcel(@Valid Demo03StudentPageReqVO pageReqVO,
-              HttpServletResponse response) throws IOException {
+                                         HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<Demo03StudentDO> list = demo03StudentService.getDemo03StudentPage(pageReqVO).getList();
         // 导出 Excel
         ExcelUtils.write(response, "学生.xls", "数据", Demo03StudentRespVO.class,
-                        BeanUtils.toBean(list, Demo03StudentRespVO.class));
+                BeanUtils.toBean(list, Demo03StudentRespVO.class));
     }
 
     // ==================== 子表（学生课程） ====================

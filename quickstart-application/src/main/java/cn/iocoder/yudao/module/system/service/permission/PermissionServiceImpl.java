@@ -30,6 +30,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.annotation.Resource;
+
 import java.util.*;
 import java.util.function.Supplier;
 
@@ -86,7 +87,7 @@ public class PermissionServiceImpl implements PermissionService {
     /**
      * 判断指定角色，是否拥有该 permission 权限
      *
-     * @param roles 指定角色数组
+     * @param roles      指定角色数组
      * @param permission 权限标识
      * @return 是否拥有
      */

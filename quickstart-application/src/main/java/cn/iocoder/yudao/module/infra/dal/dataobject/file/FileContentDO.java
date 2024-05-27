@@ -10,7 +10,7 @@ import lombok.*;
 
 /**
  * 文件内容表
- *
+ * <p>
  * 专门用于存储 {@link DBFileClient} 的文件内容
  *
  * @author 芋道源码
@@ -32,7 +32,7 @@ public class FileContentDO extends BaseDO {
     private String id;
     /**
      * 配置编号
-     *
+     * <p>
      * 关联 {@link FileConfigDO#getId()}
      */
     private Long configId;

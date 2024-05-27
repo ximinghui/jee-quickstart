@@ -34,7 +34,7 @@ public class MyBatisUtils {
         // 排序字段
         if (!CollectionUtil.isEmpty(sortingFields)) {
             page.addOrder(sortingFields.stream().map(sortingField -> SortingField.ORDER_ASC.equals(sortingField.getOrder()) ?
-                    OrderItem.asc(sortingField.getField()) : OrderItem.desc(sortingField.getField()))
+                            OrderItem.asc(sortingField.getField()) : OrderItem.desc(sortingField.getField()))
                     .collect(Collectors.toList()));
         }
         return page;
@@ -56,7 +56,7 @@ public class MyBatisUtils {
 
     /**
      * 获得 Table 对应的表名
-     *
+     * <p>
      * 兼容 MySQL 转义表名 `t_xxx`
      *
      * @param table 表

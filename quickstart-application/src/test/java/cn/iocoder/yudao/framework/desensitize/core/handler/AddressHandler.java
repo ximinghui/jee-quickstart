@@ -6,7 +6,7 @@ import cn.iocoder.yudao.framework.desensitize.core.annotation.Address;
 
 /**
  * {@link Address} 的脱敏处理器
- *
+ * <p>
  * 用于 {@link DesensitizeTest} 测试使用
  */
 public class AddressHandler implements DesensitizationHandler<Address> {

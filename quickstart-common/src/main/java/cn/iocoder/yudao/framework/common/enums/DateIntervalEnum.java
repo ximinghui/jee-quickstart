@@ -20,8 +20,7 @@ public enum DateIntervalEnum implements IntArrayValuable {
     WEEK(2, "周"),
     MONTH(3, "月"),
     QUARTER(4, "季度"),
-    YEAR(5, "年")
-    ;
+    YEAR(5, "年");
 
     public static final int[] ARRAYS = Arrays.stream(values()).mapToInt(DateIntervalEnum::getInterval).toArray();
 

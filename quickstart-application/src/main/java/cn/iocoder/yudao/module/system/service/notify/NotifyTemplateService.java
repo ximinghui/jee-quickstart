@@ -6,6 +6,7 @@ import cn.iocoder.yudao.module.system.controller.admin.notify.vo.template.Notify
 import cn.iocoder.yudao.module.system.dal.dataobject.notify.NotifyTemplateDO;
 
 import jakarta.validation.Valid;
+
 import java.util.Map;
 
 /**
@@ -65,7 +66,7 @@ public interface NotifyTemplateService {
      * 格式化站内信内容
      *
      * @param content 站内信模板的内容
-     * @param params 站内信内容的参数
+     * @param params  站内信内容的参数
      * @return 格式化后的内容
      */
     String formatNotifyTemplateContent(String content, Map<String, Object> params);

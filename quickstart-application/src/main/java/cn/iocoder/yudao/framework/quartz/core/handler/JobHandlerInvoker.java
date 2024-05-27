@@ -14,6 +14,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import jakarta.annotation.Resource;
+
 import java.time.LocalDateTime;
 
 import static cn.hutool.core.exceptions.ExceptionUtil.getRootCauseMessage;
@@ -40,7 +41,7 @@ public class JobHandlerInvoker extends QuartzJobBean {
         Long jobId = executionContext.getMergedJobDataMap().getLong(JobDataKeyEnum.JOB_ID.name());
         String jobHandlerName = executionContext.getMergedJobDataMap().getString(JobDataKeyEnum.JOB_HANDLER_NAME.name());
         String jobHandlerParam = executionContext.getMergedJobDataMap().getString(JobDataKeyEnum.JOB_HANDLER_PARAM.name());
-        int refireCount  = executionContext.getRefireCount();
+        int refireCount = executionContext.getRefireCount();
         int retryCount = (Integer) executionContext.getMergedJobDataMap().getOrDefault(JobDataKeyEnum.JOB_RETRY_COUNT.name(), 0);
         int retryInterval = (Integer) executionContext.getMergedJobDataMap().getOrDefault(JobDataKeyEnum.JOB_RETRY_INTERVAL.name(), 0);
 

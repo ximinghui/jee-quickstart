@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Import;
 
 import jakarta.annotation.Resource;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -29,10 +30,10 @@ import static cn.iocoder.yudao.framework.test.core.util.RandomUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
-* {@link NotifyMessageServiceImpl} 的单元测试类
-*
-* @author 芋道源码
-*/
+ * {@link NotifyMessageServiceImpl} 的单元测试类
+ *
+ * @author 芋道源码
+ */
 @Import(NotifyMessageServiceImpl.class)
 public class NotifyMessageServiceImplTest extends BaseDbUnitTest {
 
@@ -72,40 +73,40 @@ public class NotifyMessageServiceImplTest extends BaseDbUnitTest {
 
     @Test
     public void testGetNotifyMessagePage() {
-       // mock 数据
-       NotifyMessageDO dbNotifyMessage = randomPojo(NotifyMessageDO.class, o -> { // 等会查询到
-           o.setUserId(1L);
-           o.setUserType(UserTypeEnum.ADMIN.getValue());
-           o.setTemplateCode("test_01");
-           o.setTemplateType(10);
-           o.setCreateTime(buildTime(2022, 1, 2));
-           o.setTemplateParams(randomTemplateParams());
-       });
-       notifyMessageMapper.insert(dbNotifyMessage);
-       // 测试 userId 不匹配
-       notifyMessageMapper.insert(cloneIgnoreId(dbNotifyMessage, o -> o.setUserId(2L)));
-       // 测试 userType 不匹配
-       notifyMessageMapper.insert(cloneIgnoreId(dbNotifyMessage, o -> o.setUserType(UserTypeEnum.MEMBER.getValue())));
-       // 测试 templateCode 不匹配
-       notifyMessageMapper.insert(cloneIgnoreId(dbNotifyMessage, o -> o.setTemplateCode("test_11")));
-       // 测试 templateType 不匹配
-       notifyMessageMapper.insert(cloneIgnoreId(dbNotifyMessage, o -> o.setTemplateType(20)));
-       // 测试 createTime 不匹配
-       notifyMessageMapper.insert(cloneIgnoreId(dbNotifyMessage, o -> o.setCreateTime(buildTime(2022, 2, 1))));
-       // 准备参数
-       NotifyMessagePageReqVO reqVO = new NotifyMessagePageReqVO();
-       reqVO.setUserId(1L);
-       reqVO.setUserType(UserTypeEnum.ADMIN.getValue());
-       reqVO.setTemplateCode("est_01");
-       reqVO.setTemplateType(10);
-       reqVO.setCreateTime(buildBetweenTime(2022, 1, 1, 2022, 1, 10));
+        // mock 数据
+        NotifyMessageDO dbNotifyMessage = randomPojo(NotifyMessageDO.class, o -> { // 等会查询到
+            o.setUserId(1L);
+            o.setUserType(UserTypeEnum.ADMIN.getValue());
+            o.setTemplateCode("test_01");
+            o.setTemplateType(10);
+            o.setCreateTime(buildTime(2022, 1, 2));
+            o.setTemplateParams(randomTemplateParams());
+        });
+        notifyMessageMapper.insert(dbNotifyMessage);
+        // 测试 userId 不匹配
+        notifyMessageMapper.insert(cloneIgnoreId(dbNotifyMessage, o -> o.setUserId(2L)));
+        // 测试 userType 不匹配
+        notifyMessageMapper.insert(cloneIgnoreId(dbNotifyMessage, o -> o.setUserType(UserTypeEnum.MEMBER.getValue())));
+        // 测试 templateCode 不匹配
+        notifyMessageMapper.insert(cloneIgnoreId(dbNotifyMessage, o -> o.setTemplateCode("test_11")));
+        // 测试 templateType 不匹配
+        notifyMessageMapper.insert(cloneIgnoreId(dbNotifyMessage, o -> o.setTemplateType(20)));
+        // 测试 createTime 不匹配
+        notifyMessageMapper.insert(cloneIgnoreId(dbNotifyMessage, o -> o.setCreateTime(buildTime(2022, 2, 1))));
+        // 准备参数
+        NotifyMessagePageReqVO reqVO = new NotifyMessagePageReqVO();
+        reqVO.setUserId(1L);
+        reqVO.setUserType(UserTypeEnum.ADMIN.getValue());
+        reqVO.setTemplateCode("est_01");
+        reqVO.setTemplateType(10);
+        reqVO.setCreateTime(buildBetweenTime(2022, 1, 1, 2022, 1, 10));
 
-       // 调用
-       PageResult<NotifyMessageDO> pageResult = notifyMessageService.getNotifyMessagePage(reqVO);
-       // 断言
-       assertEquals(1, pageResult.getTotal());
-       assertEquals(1, pageResult.getList().size());
-       assertPojoEquals(dbNotifyMessage, pageResult.getList().get(0));
+        // 调用
+        PageResult<NotifyMessageDO> pageResult = notifyMessageService.getNotifyMessagePage(reqVO);
+        // 断言
+        assertEquals(1, pageResult.getTotal());
+        assertEquals(1, pageResult.getList().size());
+        assertPojoEquals(dbNotifyMessage, pageResult.getList().get(0));
     }
 
     @Test

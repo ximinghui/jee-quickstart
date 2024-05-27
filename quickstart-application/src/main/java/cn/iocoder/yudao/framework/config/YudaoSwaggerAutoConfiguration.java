@@ -35,7 +35,7 @@ import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.HEADER_
 
 /**
  * Swagger 自动配置类，基于 OpenAPI + Springdoc 实现。
- *
+ * <p>
  * 友情提示：
  * 1. Springdoc 文档地址：<a href="https://github.com/springdoc/springdoc-openapi">仓库</a>
  * 2. Swagger 规范，于 2015 更名为 OpenAPI 规范，本质是一个东西
@@ -45,7 +45,8 @@ import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.HEADER_
 @AutoConfiguration
 @ConditionalOnClass({OpenAPI.class})
 @EnableConfigurationProperties(SwaggerProperties.class)
-@ConditionalOnProperty(prefix = "springdoc.api-docs", name = "enabled", havingValue = "true", matchIfMissing = true) // 设置为 false 时，禁用
+@ConditionalOnProperty(prefix = "springdoc.api-docs", name = "enabled", havingValue = "true", matchIfMissing = true)
+// 设置为 false 时，禁用
 public class YudaoSwaggerAutoConfiguration {
 
     // ========== 全局 OpenAPI 配置 ==========
@@ -143,7 +144,7 @@ public class YudaoSwaggerAutoConfiguration {
 
     /**
      * 构建 Authorization 认证请求头参数
-     *
+     * <p>
      * 解决 Knife4j <a href="https://gitee.com/xiaoym/knife4j/issues/I69QBU">Authorize 未生效，请求header里未包含参数</a>
      *
      * @return 认证参数

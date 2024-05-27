@@ -60,7 +60,7 @@ public class WebFrameworkUtils {
     /**
      * 设置用户类型
      *
-     * @param request 请求
+     * @param request  请求
      * @param userType 用户类型
      */
     public static void setLoginUserType(ServletRequest request, Integer userType) {

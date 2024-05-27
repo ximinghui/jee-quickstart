@@ -23,6 +23,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.Resource;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -158,7 +159,7 @@ public class SmsTemplateServiceImpl implements SmsTemplateService {
     /**
      * 校验 API 短信平台的模板是否有效
      *
-     * @param channelId 渠道编号
+     * @param channelId     渠道编号
      * @param apiTemplateId API 模板编号
      */
     @VisibleForTesting

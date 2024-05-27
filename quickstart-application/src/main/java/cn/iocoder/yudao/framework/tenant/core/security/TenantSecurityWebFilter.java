@@ -19,6 +19,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.Objects;
 
@@ -62,7 +63,7 @@ public class TenantSecurityWebFilter extends ApiRequestFilter {
             if (tenantId == null) {
                 tenantId = user.getTenantId();
                 TenantContextHolder.setTenantId(tenantId);
-            // 如果传递了租户编号，则进行比对租户编号，避免越权问题
+                // 如果传递了租户编号，则进行比对租户编号，避免越权问题
             } else if (!Objects.equals(user.getTenantId(), TenantContextHolder.getTenantId())) {
                 log.error("[doFilterInternal][租户({}) User({}/{}) 越权访问租户({}) URL({}/{})]",
                         user.getTenantId(), user.getId(), user.getUserType(),

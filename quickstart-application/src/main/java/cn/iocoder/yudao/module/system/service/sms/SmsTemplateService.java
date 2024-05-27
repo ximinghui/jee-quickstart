@@ -6,6 +6,7 @@ import cn.iocoder.yudao.module.system.controller.admin.sms.vo.template.SmsTempla
 import cn.iocoder.yudao.module.system.dal.dataobject.sms.SmsTemplateDO;
 
 import jakarta.validation.Valid;
+
 import java.util.Map;
 
 /**
@@ -74,7 +75,7 @@ public interface SmsTemplateService {
      * 格式化短信内容
      *
      * @param content 短信模板的内容
-     * @param params 内容的参数
+     * @param params  内容的参数
      * @return 格式化后的内容
      */
     String formatSmsTemplateContent(String content, Map<String, Object> params);

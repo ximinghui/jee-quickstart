@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
+
 import java.util.List;
 
 import static cn.iocoder.yudao.framework.common.pojo.CommonResult.success;
@@ -33,14 +34,14 @@ public class MailTemplateController {
     @PostMapping("/create")
     @Operation(summary = "创建邮件模版")
     @PreAuthorize("@ss.hasPermission('system:mail-template:create')")
-    public CommonResult<Long> createMailTemplate(@Valid @RequestBody MailTemplateSaveReqVO createReqVO){
+    public CommonResult<Long> createMailTemplate(@Valid @RequestBody MailTemplateSaveReqVO createReqVO) {
         return success(mailTempleService.createMailTemplate(createReqVO));
     }
 
     @PutMapping("/update")
     @Operation(summary = "修改邮件模版")
     @PreAuthorize("@ss.hasPermission('system:mail-template:update')")
-    public CommonResult<Boolean> updateMailTemplate(@Valid @RequestBody MailTemplateSaveReqVO updateReqVO){
+    public CommonResult<Boolean> updateMailTemplate(@Valid @RequestBody MailTemplateSaveReqVO updateReqVO) {
         mailTempleService.updateMailTemplate(updateReqVO);
         return success(true);
     }

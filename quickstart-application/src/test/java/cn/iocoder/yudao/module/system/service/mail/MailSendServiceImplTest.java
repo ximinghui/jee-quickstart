@@ -277,16 +277,16 @@ public class MailSendServiceImplTest extends BaseMockitoUnitTest {
             // mock 方法（发送邮件）
             String messageId = randomString();
             mailUtilMock.when(() -> MailUtil.send(
-                    argThat(mailAccount -> {
-                        assertEquals("芋艿 <7685@qq.com>", mailAccount.getFrom());
-                        assertTrue(mailAccount.isAuth());
-                        assertEquals(account.getUsername(), mailAccount.getUser());
-                        assertArrayEquals(account.getPassword().toCharArray(), mailAccount.getPass());
-                        assertEquals(account.getHost(), mailAccount.getHost());
-                        assertEquals(account.getPort(), mailAccount.getPort());
-                        assertEquals(account.getSslEnable(), mailAccount.isSslEnable());
-                        return true;
-                    }), eq(message.getMail()), eq(message.getTitle()), eq(message.getContent()), eq(true)))
+                            argThat(mailAccount -> {
+                                assertEquals("芋艿 <7685@qq.com>", mailAccount.getFrom());
+                                assertTrue(mailAccount.isAuth());
+                                assertEquals(account.getUsername(), mailAccount.getUser());
+                                assertArrayEquals(account.getPassword().toCharArray(), mailAccount.getPass());
+                                assertEquals(account.getHost(), mailAccount.getHost());
+                                assertEquals(account.getPort(), mailAccount.getPort());
+                                assertEquals(account.getSslEnable(), mailAccount.isSslEnable());
+                                return true;
+                            }), eq(message.getMail()), eq(message.getTitle()), eq(message.getContent()), eq(true)))
                     .thenReturn(messageId);
 
             // 调用

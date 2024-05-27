@@ -6,6 +6,7 @@ import cn.iocoder.yudao.module.system.controller.admin.mail.vo.template.MailTemp
 import cn.iocoder.yudao.module.system.dal.dataobject.mail.MailTemplateDO;
 
 import jakarta.validation.Valid;
+
 import java.util.List;
 import java.util.Map;
 
@@ -74,7 +75,7 @@ public interface MailTemplateService {
      * 邮件模版内容合成
      *
      * @param content 邮件模版
-     * @param params 合成参数
+     * @param params  合成参数
      * @return 格式化后的内容
      */
     String formatMailTemplateContent(String content, Map<String, Object> params);

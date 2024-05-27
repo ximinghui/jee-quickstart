@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.URL;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
 
 @Schema(description = "管理后台 - OAuth2 客户端创建/修改 Request VO")

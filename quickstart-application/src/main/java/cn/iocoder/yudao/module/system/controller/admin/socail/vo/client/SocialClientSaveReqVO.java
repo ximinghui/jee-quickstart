@@ -11,6 +11,7 @@ import lombok.Data;
 
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotNull;
+
 import java.util.Objects;
 
 @Schema(description = "管理后台 - 社交客户端创建/修改 Request VO")

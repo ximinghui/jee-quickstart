@@ -12,7 +12,7 @@ import lombok.*;
 
 /**
  * 社交客户端 DO
- *
+ * <p>
  * 对应 {@link AuthConfig} 配置，满足不同租户，有自己的客户端配置，实现社交（三方）登录
  *
  * @author 芋道源码
@@ -37,21 +37,21 @@ public class SocialClientDO extends TenantBaseDO {
     private String name;
     /**
      * 社交类型
-     *
+     * <p>
      * 枚举 {@link SocialTypeEnum}
      */
     private Integer socialType;
     /**
      * 用户类型
-     *
+     * <p>
      * 目的：不同用户类型，对应不同的小程序，需要自己的配置
-     *
+     * <p>
      * 枚举 {@link UserTypeEnum}
      */
     private Integer userType;
     /**
      * 状态
-     *
+     * <p>
      * 枚举 {@link CommonStatusEnum}
      */
     private Integer status;
@@ -67,7 +67,7 @@ public class SocialClientDO extends TenantBaseDO {
 
     /**
      * 代理编号
-     *
+     * <p>
      * 目前只有部分“社交类型”在使用：
      * 1. 企业微信：对应授权方的网页应用 ID
      */
