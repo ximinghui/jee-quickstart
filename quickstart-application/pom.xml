@@ -28,11 +28,6 @@
     <dependencies>
 
         <!-- ################### Server模块的依赖 ################### -->
-        <dependency>
-            <groupId>org.ximinghui</groupId>
-            <artifactId>quickstart-infrastructure</artifactId>
-            <version>${revision}</version>
-        </dependency>
         <!-- spring boot 配置所需依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

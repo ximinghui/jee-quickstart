@@ -15,7 +15,6 @@
     <!-- 项目结构 -->
     <modules>
         <module>quickstart-common</module>
-        <module>quickstart-infrastructure</module>
         <module>quickstart-application</module>
         <module>refactoring-required</module>
     </modules>
