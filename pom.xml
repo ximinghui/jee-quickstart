@@ -16,7 +16,6 @@
     <modules>
         <module>quickstart-common</module>
         <module>quickstart-application</module>
-        <module>refactoring-required</module>
     </modules>
 
     <!-- 属性定义 -->
