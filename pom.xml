@@ -16,6 +16,7 @@
     <modules>
         <module>quickstart-common</module>
         <module>quickstart-application</module>
+        <module>ruoyi</module>
     </modules>
 
     <!-- 属性定义 -->
