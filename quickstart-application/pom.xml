@@ -4,12 +4,26 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- 父项目 -->
     <parent>
         <groupId>org.ximinghui</groupId>
         <artifactId>jee-quickstart</artifactId>
         <version>2.2.0</version>
     </parent>
 
+    <!-- 项目信息 -->
     <artifactId>quickstart-application</artifactId>
+    <name>JEE Quick Start Application</name>
+    <description>JEE Quick Start Application 是 Quick Start 项目的主程序</description>
+
+    <!-- 依赖项 -->
+    <dependencies>
+        <!-- TODO: 重构若依模块内容，逐步迁移到 QuickStart Application 中 -->
+        <dependency>
+            <groupId>org.ximinghui</groupId>
+            <artifactId>ruoyi</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+    </dependencies>
 
 </project>
