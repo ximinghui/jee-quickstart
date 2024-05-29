@@ -2,11 +2,11 @@ package cn.iocoder.yudao.framework.tenant.core.mq.kafka;
 
 import cn.hutool.core.util.ReflectUtil;
 import cn.iocoder.yudao.framework.tenant.core.context.TenantContextHolder;
+import cn.iocoder.yudao.framework.tenant.core.mq.InvocableHandlerMethod;
 import org.apache.kafka.clients.producer.ProducerInterceptor;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.header.Headers;
-import org.springframework.messaging.handler.invocation.InvocableHandlerMethod;
 
 import java.util.Map;
 

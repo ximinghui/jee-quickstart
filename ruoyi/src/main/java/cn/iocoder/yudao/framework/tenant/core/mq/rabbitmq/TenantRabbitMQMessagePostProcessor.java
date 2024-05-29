@@ -5,7 +5,7 @@ import org.apache.kafka.clients.producer.ProducerInterceptor;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessagePostProcessor;
-import org.springframework.messaging.handler.invocation.InvocableHandlerMethod;
+import cn.iocoder.yudao.framework.tenant.core.mq.InvocableHandlerMethod;
 
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.HEADER_TENANT_ID;
 

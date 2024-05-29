@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.springframework.messaging.handler.invocation;
+package cn.iocoder.yudao.framework.tenant.core.mq;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -30,6 +30,9 @@ import org.springframework.core.ResolvableType;
 import org.springframework.lang.Nullable;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.HandlerMethod;
+import org.springframework.messaging.handler.invocation.HandlerMethodArgumentResolver;
+import org.springframework.messaging.handler.invocation.HandlerMethodArgumentResolverComposite;
+import org.springframework.messaging.handler.invocation.MethodArgumentResolutionException;
 import org.springframework.util.ObjectUtils;
 
 import static cn.iocoder.yudao.framework.web.core.util.WebFrameworkUtils.HEADER_TENANT_ID;

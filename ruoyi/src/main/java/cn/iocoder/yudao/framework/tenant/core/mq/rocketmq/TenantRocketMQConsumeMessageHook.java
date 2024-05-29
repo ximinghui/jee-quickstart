@@ -6,7 +6,7 @@ import cn.iocoder.yudao.framework.tenant.core.context.TenantContextHolder;
 import org.apache.rocketmq.client.hook.ConsumeMessageContext;
 import org.apache.rocketmq.client.hook.ConsumeMessageHook;
 import org.apache.rocketmq.common.message.MessageExt;
-import org.springframework.messaging.handler.invocation.InvocableHandlerMethod;
+import cn.iocoder.yudao.framework.tenant.core.mq.InvocableHandlerMethod;
 
 import java.util.List;
 
