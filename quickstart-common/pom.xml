@@ -8,25 +8,13 @@
     <parent>
         <groupId>org.ximinghui</groupId>
         <artifactId>jee-quickstart</artifactId>
-        <version>${revision}</version>
+        <version>2.2.0</version>
     </parent>
 
     <!-- 项目信息 -->
     <artifactId>quickstart-common</artifactId>
     <name>JEE Quick Start Common</name>
     <description>JEE Quick Start Common是一个实用工具类库 | TODO: 定义基础 pojo 类、枚举、工具类等等</description>
-
-    <!-- 属性定义 -->
-    <properties>
-        <!-- Java源代码版本 -->
-        <maven.compiler.source>21</maven.compiler.source>
-        <!-- Java字节码版本 -->
-        <maven.compiler.target>21</maven.compiler.target>
-        <!-- Java发行版本 -->
-        <maven.compiler.release>21</maven.compiler.release>
-        <!-- Java源码和资源文件编码 -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
     <!-- 依赖项 -->
     <dependencies>
@@ -75,13 +63,14 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
-            <scope>provided</scope> <!-- 设置为 provided，主要是 PageParam 使用到 -->
+            <version>2.2.0</version>
         </dependency>
 
         <!-- 监控相关 -->
         <dependency>
             <groupId>org.apache.skywalking</groupId>
             <artifactId>apm-toolkit-trace</artifactId>
+            <version>9.0.0</version>
         </dependency>
 
         <!-- 工具类相关 -->
@@ -93,19 +82,23 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
+            <version>1.5.5.Final</version>
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-jdk8</artifactId> <!-- use mapstruct-jdk8 for Java 8 or higher -->
+            <version>1.5.5.Final</version>
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
+            <version>1.5.5.Final</version>
         </dependency>
 
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
+            <version>33.0.0-jre</version>
             <scope>provided</scope> <!-- 设置为 provided，只有工具类需要使用到 -->
         </dependency>
 
@@ -140,11 +133,13 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
+            <version>5.8.25</version>
         </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>transmittable-thread-local</artifactId>
+            <version>2.14.5</version>
         </dependency>
 
         <!-- Test 测试相关 -->
