@@ -1,4 +1,4 @@
-package cn.iocoder.yudao.module.infra.service.demo;
+package org.example.module.infra.service.demo;
 
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -6,16 +6,16 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-import cn.iocoder.yudao.module.infra.controller.admin.demo.vo.*;
-import cn.iocoder.yudao.module.infra.dal.dataobject.demo.InfraCategoryDO;
-import cn.iocoder.yudao.framework.common.pojo.PageResult;
-import cn.iocoder.yudao.framework.common.pojo.PageParam;
-import cn.iocoder.yudao.framework.common.util.object.BeanUtils;
+import org.example.module.infra.controller.admin.demo.vo.*;
+import org.example.module.infra.dal.dataobject.demo.InfraCategoryDO;
+import pojo.common.framework.org.example.PageResult;
+import pojo.common.framework.org.example.PageParam;
+import object.util.common.framework.org.example.BeanUtils;
 
-import cn.iocoder.yudao.module.infra.dal.mysql.demo.InfraCategoryMapper;
+import org.example.module.infra.dal.mysql.demo.InfraCategoryMapper;
 
-import static cn.iocoder.yudao.framework.common.exception.util.ServiceExceptionUtil.exception;
-import static cn.iocoder.yudao.module.infra.enums.ErrorCodeConstants.*;
+import static util.exception.common.framework.org.example.ServiceExceptionUtil.exception;
+import static enums.infra.module.org.example.ErrorCodeConstants.*;
 
 /**
  * 分类 Service 实现类

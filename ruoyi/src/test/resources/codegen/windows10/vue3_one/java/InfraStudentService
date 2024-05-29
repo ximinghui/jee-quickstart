@@ -1,11 +1,11 @@
-package cn.iocoder.yudao.module.infra.service.demo;
+package org.example.module.infra.service.demo;
 
 import java.util.*;
 import javax.validation.*;
-import cn.iocoder.yudao.module.infra.controller.admin.demo.vo.*;
-import cn.iocoder.yudao.module.infra.dal.dataobject.demo.InfraStudentDO;
-import cn.iocoder.yudao.framework.common.pojo.PageResult;
-import cn.iocoder.yudao.framework.common.pojo.PageParam;
+import org.example.module.infra.controller.admin.demo.vo.*;
+import org.example.module.infra.dal.dataobject.demo.InfraStudentDO;
+import pojo.common.framework.org.example.PageResult;
+import pojo.common.framework.org.example.PageParam;
 
 /**
  * 学生 Service 接口
