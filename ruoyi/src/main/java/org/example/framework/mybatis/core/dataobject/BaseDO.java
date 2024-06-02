@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
  * 基础实体对象
  */
 @Data
-@JsonIgnoreProperties(value = "transMap") // 由于 Easy-Trans 会添加 transMap 属性，避免 Jackson 在 Spring Cache 反序列化报错
 public abstract class BaseDO implements Serializable {
 
     /**
