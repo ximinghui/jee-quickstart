@@ -57,4 +57,18 @@
         </dependency>
     </dependencies>
 
+    <!-- 中国大陆镜像Maven仓库 TODO: 使用华为和阿里的镜像源作为临时解决网络慢的方案 -->
+    <repositories>
+        <repository>
+            <id>huawei-cloud</id>
+            <name>huawei</name>
+            <url>https://mirrors.huaweicloud.com/repository/maven/</url>
+        </repository>
+        <repository>
+            <id>aliyun-maven</id>
+            <name>aliyun</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </repository>
+    </repositories>
+
 </project>

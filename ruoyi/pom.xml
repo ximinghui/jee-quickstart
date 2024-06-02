@@ -913,18 +913,5 @@
             </plugin>
         </plugins>
     </build>
-    <!-- 使用 huawei / aliyun 的 Maven 源，提升下载速度 -->
-    <repositories>
-        <repository>
-            <id>huawei-cloud</id>
-            <name>huawei</name>
-            <url>https://mirrors.huaweicloud.com/repository/maven/</url>
-        </repository>
-        <repository>
-            <id>aliyun-maven</id>
-            <name>aliyun</name>
-            <url>https://maven.aliyun.com/repository/public</url>
-        </repository>
-    </repositories>
 
 </project>
